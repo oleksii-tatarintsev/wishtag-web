@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies and build
+      - name: Install dependencies
         run: npm ci
 
       - name: Setup Flutter
@@ -30,8 +30,15 @@ jobs:
       - name: Install Flutter dependencies
         run: flutter pub get
 
-      - name: Build Flutter web app
-        run: flutter build web --release ${{ secrets.PROD_BUILD_ARGS }}
+      - name: Get commit hash
+        run: echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+      - name: Build Flutter web app with Dart defines
+        run: |
+          flutter build web --release \
+            --dart-define=BUILD_MODE=release \
+            --dart-define=COMMIT_HASH=${{ env.COMMIT_HASH }} \
+            ${{ secrets.PROD_BUILD_ARGS }}
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0

@@ -44,7 +44,8 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              'WishTag in dev..',
+              'WishTag in dev..\n'
+                  '${const String.fromEnvironment('COMMIT_HASH')}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
