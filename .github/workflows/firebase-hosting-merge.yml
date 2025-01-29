@@ -19,8 +19,7 @@ jobs:
 
       - name: Install dependencies and build
         run: |
-          npm ci
-          npm run build
+          run: npm ci
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
