@@ -1,28 +1,236 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
-
-# The following line activates a set of recommended lints for Flutter apps,
-# packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
+analyzer:
+  language:
+    strict-inference: true # https://github.com/dart-lang/language/issues/508
+    strict-raw-types: true # https://github.com/dart-lang/language/blob/master/resources/type-system/strict-raw-types.md
+  errors:
+    undefined_prefixed_name: ignore
+    todo: info
+    deprecated_member_use_from_same_package: info
+    deprecated_member_use: info
+    assignment_of_do_not_store: warning
+    dead_code_catch_following_catch: warning
+    dead_code_on_catch_subtype: warning
+    duplicate_hidden_name: warning
+    duplicate_ignore: warning
+    duplicate_shown_name: warning
+    equal_elements_in_set: warning
+    equal_keys_in_map: warning
+    import_deferred_library_with_load_function: warning
+    inference_failure_on_collection_literal: warning
+    inference_failure_on_function_return_type: warning
+    inference_failure_on_instance_creation: warning
+    inference_failure_on_uninitialized_variable: warning
+    inference_failure_on_untyped_parameter: warning
+    invalid_annotation_target: ignore
+    invalid_export_of_internal_element: warning
+    invalid_export_of_internal_element_indirectly: warning
+    invalid_factory_method_decl: warning
+    invalid_factory_method_impl: warning
+    invalid_internal_annotation: warning
+    invalid_literal_annotation: warning
+    invalid_non_virtual_annotation: warning
+    invalid_override_of_non_virtual_member: warning
+    invalid_required_named_param: warning
+    invalid_required_optional_positional_param: warning
+    invalid_required_positional_param: warning
+    invalid_use_of_internal_member: warning
+    invalid_use_of_protected_member: warning
+    invalid_use_of_visible_for_template_member: warning
+    invalid_use_of_visible_for_testing_member: warning
+    invalid_visibility_annotation: warning
+    missing_required_param: warning
+    missing_return: warning
+    mixin_on_sealed_class: warning
+    must_be_immutable: warning
+    must_call_super: warning
+    non_const_call_to_literal_constructor: warning
+    null_check_always_fails: warning
+    nullable_type_in_catch_clause: warning
+    receiver_of_type_never: warning
+    return_of_do_not_store: warning
+    sdk_version_gt_gt_gt_operator: warning
+    strict_raw_type: warning
+    subtype_of_sealed_class: warning
+    undefined_hidden_name: warning
+    undefined_shown_name: warning
+    unignorable_ignore: warning
+    unnecessary_cast: warning
+    unnecessary_ignore: warning
+    unnecessary_no_such_method: warning
+    unused_catch_clause: warning
+    unused_catch_stack: warning
+    unused_element: warning
+    unused_field: warning
+    unused_label: warning
+    unused_local_variable: warning
+    unused_shown_name: warning
+    avoid_void_async: error
+    duplicate_export: error
+    duplicate_import: error
+    unused_import: error
+    dead_code: error
+    sized_box_for_whitespace: error
+    unawaited_futures: error
+    avoid_returning_null_for_void: error
+    unnecessary_import: error
 
-linter:
-  # The lint rules applied to this project can be customized in the
-  # section below to disable rules from the `package:flutter_lints/flutter.yaml`
-  # included above or to enable additional rules. A list of all available lints
-  # and their documentation is published at https://dart.dev/lints.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
+  exclude:
+    - "**/*.gr.dart"
+    - "**/*.g.dart"
+    - "**/*.chopper.dart"
+    - "**/*.freezed.dart"
+    - "**/*.config.dart"
+    - "**/swagger_generated_code/**"
+    - "**/Jenkinsfile"
+  plugins:
+    - dart_code_metrics
+
+dart_code_metrics:
+  #https://github.com/dart-code-checker/dart-code-metrics/tree/master/doc/rules
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
-
-# Additional information about this file can be found at
-# https://dart.dev/guides/language/analysis-options
+    - always-remove-listener:
+        severity: warning
+    - avoid-nested-conditional-expressions:
+        exclude:
+          - test/**
+        severity: warning
+    - avoid-unnecessary-setstate:
+        exclude:
+          - test/**
+        severity: warning
+    - avoid-unused-parameters:
+        exclude:
+          - test/**
+        severity: warning
+    - avoid-wrapping-in-padding:
+        exclude:
+          - test/**
+        severity: warning
+    - newline-before-return:
+        severity: warning
+    - no-boolean-literal-compare:
+        severity: error
+    - no-object-declaration:
+        severity: warning
+    - prefer-trailing-comma:
+        exclude:
+          - test/**
+        break-on: 5
+linter:
+  rules:
+    avoid_print: true
+    unawaited_futures: true
+    always_put_required_named_parameters_first: true
+    avoid_bool_literals_in_conditional_expressions: true
+    avoid_escaping_inner_quotes: true
+    avoid_positional_boolean_parameters: true
+    avoid_relative_lib_imports: true
+    avoid_unnecessary_containers: true
+    avoid_unused_constructor_parameters: true
+    constant_identifier_names: true
+    directives_ordering: true
+    exhaustive_cases: true
+    deprecated_consistency: true
+    iterable_contains_unrelated_type: true
+    list_remove_unrelated_type: true
+    literal_only_boolean_expressions: true
+    no_logic_in_create_state: true
+    only_throw_errors: true
+    parameter_assignments: true
+    prefer_asserts_in_initializer_lists: true
+    prefer_const_constructors: false
+    prefer_const_constructors_in_immutables: true
+    prefer_const_declarations: true
+    prefer_const_literals_to_create_immutables: false
+    prefer_constructors_over_static_methods: true
+    prefer_final_in_for_each: true
+    prefer_final_locals: true
+    prefer_if_elements_to_conditional_expressions: true
+    prefer_initializing_formals: true
+    prefer_inlined_adds: true
+    prefer_interpolation_to_compose_strings: true
+    prefer_is_not_operator: true
+    prefer_mixin: true
+    prefer_null_aware_operators: true
+    prefer_typing_uninitialized_variables: true
+    provide_deprecation_message: true
+    sized_box_for_whitespace: true
+    sort_child_properties_last: true
+    sort_unnamed_constructors_first: true
+    type_annotate_public_apis: true
+    unnecessary_await_in_return: true
+    unnecessary_lambdas: false
+    unnecessary_null_aware_assignments: true
+    unnecessary_overrides: true
+    unnecessary_parenthesis: true
+    unnecessary_raw_strings: true
+    unnecessary_string_escapes: true
+    unnecessary_string_interpolations: true
+    use_is_even_rather_than_modulo: true
+    use_key_in_widget_constructors: true
+    use_raw_strings: true
+    use_setters_to_change_properties: false
+    void_checks: true
+    avoid_private_typedef_functions: true
+    avoid_returning_null: true
+    avoid_setters_without_getters: true
+    await_only_futures: true
+    camel_case_types: true
+    cancel_subscriptions: true
+    empty_statements: true
+    hash_and_equals: true
+    implementation_imports: true
+    non_constant_identifier_names: true
+    package_names: true
+    package_prefixed_library_names: true
+    prefer_function_declarations_over_variables: true
+    test_types_in_equals: true
+    unnecessary_brace_in_string_interps: true
+    unnecessary_getters_setters: true
+    unnecessary_statements: true
+    avoid_void_async: true
+    always_declare_return_types: true
+    always_require_non_null_named_parameters: true
+    annotate_overrides: true
+    avoid_empty_else: true
+    avoid_init_to_null: true
+    avoid_null_checks_in_equality_operators: true
+    avoid_return_types_on_setters: true
+    avoid_shadowing_type_parameters: true
+    avoid_types_as_parameter_names: true
+    camel_case_extensions: true
+    curly_braces_in_flow_control_structures: true
+    empty_catches: true
+    empty_constructor_bodies: true
+    library_names: true
+    library_prefixes: true
+    no_duplicate_case_values: true
+    null_closures: true
+    omit_local_variable_types: false
+    prefer_adjacent_string_concatenation: true
+    prefer_collection_literals: true
+    prefer_conditional_assignment: true
+    prefer_contains: true
+    prefer_equal_for_default_values: true
+    prefer_final_fields: true
+    prefer_for_elements_to_map_fromIterable: true
+    prefer_generic_function_type_aliases: true
+    prefer_if_null_operators: true
+    prefer_is_empty: true
+    prefer_is_not_empty: true
+    prefer_iterable_whereType: true
+    prefer_single_quotes: true
+    prefer_spread_collections: true
+    recursive_getters: true
+    slash_for_doc_comments: true
+    type_init_formals: true
+    unnecessary_const: true
+    unnecessary_new: true
+    unnecessary_null_in_if_null_operators: true
+    unnecessary_this: true
+    unrelated_type_equality_checks: true
+    use_function_type_syntax_for_parameters: true
+    use_rethrow_when_possible: true
+    valid_regexps: true
+    depend_on_referenced_packages: false

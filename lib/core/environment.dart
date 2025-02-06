@@ -1,11 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 
 class Environment {
-
   static final Environment instance = Environment._instance();
 
-
-  factory Environment(){
+  factory Environment() {
     return instance;
   }
 
