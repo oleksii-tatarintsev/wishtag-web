@@ -32,7 +32,7 @@ jobs:
 
       - name: Code generation
         run: dart run build_runner build
-        
+
       - name: Get commit hash
         run: echo "COMMIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 

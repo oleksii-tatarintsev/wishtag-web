@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wishtag_web/presentation/login_screen/login_notifier.dart';
 import 'package:wishtag_web/shared/styles.dart';
 import 'package:wishtag_web/shared/ui_kit.dart';
+import 'package:wishtag_web/utils/toast_messenger/toast_controller.dart';
 import 'package:wishtag_web/utils/validator.dart';
 
 @RoutePage(name: 'LoginRoute')
@@ -49,10 +50,10 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       backgroundColor: AppColors.mainBg,
       body: Center(
         child: Container(
-          constraints: BoxConstraints(maxWidth: 500),
+          constraints: BoxConstraints(maxWidth: 700, maxHeight: 760),
           padding: EdgeInsets.all(28.sp),
-          width: 500,
-          height: 410,
+          width: 500.sp,
+          height: 410.sp,
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.containerBorder),
             color: Colors.white,
@@ -83,27 +84,24 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                   obscureText: true,
                   controller: _passwordController,
                 ),
-                ValueListenableBuilder<bool>(
-                    valueListenable: _isButtonActive,
-                    builder: (context, isActive, _) {
-                      return SizedBox(
-                        width: double.infinity,
-                        child: AppFilledTextButton(
-                          title: 'Login',
-                          buttonStyle: FilledTextButtonType.green,
-                          // TODO: REMAKE VALIDATION PROCESS
-                          onPressed: isActive
-                              ? () async {
-                                  final loginNotifier = ref.read(loginNotifierProvider.notifier);
-                                  await loginNotifier.singIn(
-                                    email: _emailController.text.trim(),
-                                    password: _passwordController.text.trim(),
-                                  );
-                                }
-                              : null,
-                        ),
-                      );
-                    })
+                SizedBox(
+                  width: double.infinity,
+                  child: AppFilledTextButton(
+                    title: 'Login',
+                    buttonStyle: FilledTextButtonType.green,
+                    onPressed: () async {
+                      if(_isButtonActive.value){
+                        final loginNotifier = ref.read(loginNotifierProvider.notifier);
+                        await loginNotifier.singIn(
+                          email: _emailController.text.trim(),
+                          password: _passwordController.text.trim(),
+                        );
+                      }else{
+                        Toast.add(message: 'loc_check_errors', containerColor: Colors.amber);
+                      }
+                    },
+                  ),
+                )
               ],
             ),
           ),
