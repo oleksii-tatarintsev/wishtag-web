@@ -1,17 +1,21 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wishtag_web/presentation/login_screen/login_notifier.dart';
 import 'package:wishtag_web/shared/styles.dart';
 import 'package:wishtag_web/shared/ui_kit.dart';
 import 'package:wishtag_web/utils/validator.dart';
 
-class LoginScreen extends StatefulWidget {
+@RoutePage(name: 'LoginRoute')
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreenState extends ConsumerState<LoginScreen> {
   final ValueNotifier<bool> _isButtonActive = ValueNotifier(false);
 
   final _formKey = GlobalKey<FormState>();
@@ -45,9 +49,10 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: AppColors.mainBg,
       body: Center(
         child: Container(
+          constraints: BoxConstraints(maxWidth: 500),
           padding: EdgeInsets.all(28.sp),
-          width: 500.sp,
-          height: 410.sp,
+          width: 500,
+          height: 410,
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.containerBorder),
             color: Colors.white,
@@ -86,7 +91,16 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: AppFilledTextButton(
                           title: 'Login',
                           buttonStyle: FilledTextButtonType.green,
-                          onPressed: isActive ? () {} : null,
+                          // TODO: REMAKE VALIDATION PROCESS
+                          onPressed: isActive
+                              ? () async {
+                                  final loginNotifier = ref.read(loginNotifierProvider.notifier);
+                                  await loginNotifier.singIn(
+                                    email: _emailController.text.trim(),
+                                    password: _passwordController.text.trim(),
+                                  );
+                                }
+                              : null,
                         ),
                       );
                     })

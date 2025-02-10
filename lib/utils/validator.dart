@@ -2,7 +2,6 @@
 
 class Validator {
   static String? validateEmail(String? value) {
-
     if (value != null) {
       final regExp = RegExp(
         '^[a-zA-Z0-9._-]{1,30}[@]([a-zA-Z0-9]{1,30}[.]{0,1}[a-zA-Z0-9]{1,30}){1,3}[.][a-zA-Z]{1,4}',

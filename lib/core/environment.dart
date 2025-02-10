@@ -11,7 +11,6 @@ class Environment {
 
   Future<FirebaseApp> firebaseInit() async {
     return Firebase.initializeApp(
-      name: const String.fromEnvironment('APP_NAME'),
       options: const FirebaseOptions(
         apiKey: String.fromEnvironment('API_KEY'),
         authDomain: String.fromEnvironment('AUTH_DOMAIN'),
