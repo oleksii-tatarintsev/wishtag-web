@@ -157,6 +157,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             onPressed: () {
                               final loginNotifier = ref.read(loginNotifierProvider.notifier);
                               loginNotifier.signOut();
+                              AutoRouter.of(context).push(LoginRoute());
                             },
                             child: SvgPicture.asset(
                               'assets/icons/logout.svg',
