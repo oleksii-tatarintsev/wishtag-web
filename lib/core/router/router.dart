@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:wishtag_web/core/router/guards/auth_guard.dart';
 import 'package:wishtag_web/core/router/router.gr.dart';
 import 'package:wishtag_web/main.dart';
@@ -6,7 +7,15 @@ import 'package:wishtag_web/main.dart';
 @AutoRouterConfig(replaceInRouteName: 'Screen|Page,Route')
 class AppRouter extends RootStackRouter {
   @override
-  RouteType get defaultRouteType => RouteType.material();
+  RouteType get defaultRouteType => RouteType.custom(
+    durationInMilliseconds: 600,
+    reverseDurationInMilliseconds: 600,
+    transitionsBuilder: (_, anim, __, child) {
+    return FadeTransition(
+      opacity: anim,
+      child: child,
+    );
+  },);
 
   @override
   List<AutoRoute> get routes => [
