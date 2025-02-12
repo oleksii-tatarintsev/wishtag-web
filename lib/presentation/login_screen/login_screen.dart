@@ -51,10 +51,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       backgroundColor: AppColors.mainBg,
       body: Center(
         child: Container(
-          constraints: BoxConstraints(maxWidth: 700, maxHeight: 760),
-          padding: EdgeInsets.all(28.sp),
-          width: 500.sp,
-          height: 410.sp,
+          padding: EdgeInsets.all(28.r),
+          width: 500.r,
+          height: 400.r,
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.containerBorder),
             color: Colors.white,
@@ -65,7 +64,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           child: Form(
             key: _formKey,
             child: Column(
-              spacing: 20.sp,
+              spacing: 20.r,
               children: [
                 Text('Admin Panel Login', style: AppFonts.bold23),
                 AppTextField(

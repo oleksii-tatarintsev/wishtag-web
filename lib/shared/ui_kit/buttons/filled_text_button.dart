@@ -33,7 +33,7 @@ class AppFilledTextButton extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: MaterialButton(
-        height: 50.sp,
+        height: 50.r,
         color: buttonStyle.color,
         disabledColor: buttonStyle.color.withValues(alpha: 0.5),
         textColor: Colors.white,

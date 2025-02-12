@@ -23,7 +23,7 @@ class NavigationBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 10),
+      margin: EdgeInsets.symmetric(vertical: 10.r),
       child: MouseRegion(
         cursor: SystemMouseCursors.click,
         child: GestureDetector(
@@ -32,11 +32,11 @@ class NavigationBarItem extends StatelessWidget {
             onNavigate.call();
           },
           child: Row(
-            spacing: 10.sp,
+            spacing: 10.r,
             children: [
               SvgPicture.asset(
                 icon,
-                width: 18.sp,
+                width: 18.r,
                 colorFilter: ColorFilter.mode(
                   Colors.white,
                   BlendMode.srcIn,

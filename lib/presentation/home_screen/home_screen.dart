@@ -42,21 +42,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             children: [
               Expanded(
                 child: Container(
-                  width: 220.sp,
+                  width: 220.r,
                   color: AppColors.sideBarColor,
                   child: Padding(
-                    padding: EdgeInsets.only(left: 15.sp, right: 15.sp, bottom: 15.sp),
+                    padding: EdgeInsets.only(
+                      left: 15.r,
+                      right: 15.r,
+                      bottom: 15.r,
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 200.sp,
-                          height: 60.sp,
+                          width: 200.r,
+                          height: 60.r,
                           child: Row(spacing: 10, children: [
                             SvgPicture.asset(
                               'assets/icons/box-heart.svg',
-                              width: 28.sp,
+                              width: 28.r,
                               colorFilter: ColorFilter.mode(
                                 Colors.white,
                                 BlendMode.srcIn,
@@ -69,75 +73,80 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           ]),
                         ),
                         SizedBox(
-                          height: 30.sp,
+                          height: 30.r,
                         ),
                         ValueListenableBuilder(
-                            valueListenable: currentRoute,
-                            builder: (context, value, child) {
-                              return NavigationBarItem(
-                                title: 'Dashboard',
-                                icon: 'assets/icons/dashboard-panel.svg',
-                                route: DashboardRoute(),
-                                isActiveTab: value == '/dashboard',
-                                onNavigate: () {
-                                  currentRoute.value = '/dashboard';
-                                },
-                              );
-                            }),
+                          valueListenable: currentRoute,
+                          builder: (context, value, child) {
+                            return NavigationBarItem(
+                              title: 'Dashboard',
+                              icon: 'assets/icons/dashboard-panel.svg',
+                              route: DashboardRoute(),
+                              isActiveTab: value == '/dashboard',
+                              onNavigate: () {
+                                currentRoute.value = '/dashboard';
+                              },
+                            );
+                          },
+                        ),
                         ValueListenableBuilder(
-                            valueListenable: currentRoute,
-                            builder: (context, value, child) {
-                              return NavigationBarItem(
-                                title: 'Users',
-                                icon: 'assets/icons/users-alt.svg',
-                                route: UsersRoute(),
-                                isActiveTab: value == '/users',
-                                onNavigate: () {
-                                  currentRoute.value = '/users';
-                                },
-                              );
-                            }),
+                          valueListenable: currentRoute,
+                          builder: (context, value, child) {
+                            return NavigationBarItem(
+                              title: 'Users',
+                              icon: 'assets/icons/users-alt.svg',
+                              route: UsersRoute(),
+                              isActiveTab: value == '/users',
+                              onNavigate: () {
+                                currentRoute.value = '/users';
+                              },
+                            );
+                          },
+                        ),
                         ValueListenableBuilder(
-                            valueListenable: currentRoute,
-                            builder: (context, value, child) {
-                              return NavigationBarItem(
-                                title: 'Logs',
-                                icon: 'assets/icons/newspaper.svg',
-                                route: UsersRoute(),
-                                isActiveTab: value == '/logs',
-                                onNavigate: () {
-                                  currentRoute.value = '/logs';
-                                },
-                              );
-                            }),
+                          valueListenable: currentRoute,
+                          builder: (context, value, child) {
+                            return NavigationBarItem(
+                              title: 'Logs',
+                              icon: 'assets/icons/newspaper.svg',
+                              route: UsersRoute(),
+                              isActiveTab: value == '/logs',
+                              onNavigate: () {
+                                currentRoute.value = '/logs';
+                              },
+                            );
+                          },
+                        ),
                         ValueListenableBuilder(
-                            valueListenable: currentRoute,
-                            builder: (context, value, child) {
-                              return NavigationBarItem(
-                                title: 'Administrators',
-                                icon: 'assets/icons/admin-alt.svg',
-                                route: UsersRoute(),
-                                isActiveTab: value == '/administrators',
-                                onNavigate: () {
-                                  currentRoute.value = '/administrators';
-                                },
-                              );
-                            }),
+                          valueListenable: currentRoute,
+                          builder: (context, value, child) {
+                            return NavigationBarItem(
+                              title: 'Administrators',
+                              icon: 'assets/icons/admin-alt.svg',
+                              route: UsersRoute(),
+                              isActiveTab: value == '/administrators',
+                              onNavigate: () {
+                                currentRoute.value = '/administrators';
+                              },
+                            );
+                          },
+                        ),
                         ValueListenableBuilder(
-                            valueListenable: currentRoute,
-                            builder: (context, value, child) {
-                              return NavigationBarItem(
-                                title: 'Support',
-                                icon: 'assets/icons/user-headset.svg',
-                                route: UsersRoute(),
-                                isActiveTab: value == '/support',
-                                onNavigate: () {
-                                  Future.delayed(Duration.zero, () {
-                                    currentRoute.value = '/support';
-                                  });
-                                },
-                              );
-                            }),
+                          valueListenable: currentRoute,
+                          builder: (context, value, child) {
+                            return NavigationBarItem(
+                              title: 'Support',
+                              icon: 'assets/icons/user-headset.svg',
+                              route: UsersRoute(),
+                              isActiveTab: value == '/support',
+                              onNavigate: () {
+                                Future.delayed(Duration.zero, () {
+                                  currentRoute.value = '/support';
+                                });
+                              },
+                            );
+                          },
+                        ),
                         Spacer(),
                         Center(
                           child: MaterialButton(

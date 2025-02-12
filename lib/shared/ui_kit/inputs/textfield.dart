@@ -33,7 +33,7 @@ class AppTextField extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       child: Column(
-        spacing: 5.sp,
+        spacing: 5.r,
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
