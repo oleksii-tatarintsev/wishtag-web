@@ -7,7 +7,7 @@ import 'package:wishtag_web/utils/toast_messenger/toast_wrapper.dart';
 class Application extends ConsumerWidget {
   Application({super.key});
 
-  final _appRouter = AppRouter();
+  final appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -21,10 +21,10 @@ class Application extends ConsumerWidget {
             child: MaterialApp.router(
               title: 'WishTag App',
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                useMaterial3: true,
-              ),
-              routerConfig: _appRouter.config(),
+                  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                  useMaterial3: true,
+                  fontFamily: 'Montserrat'),
+              routerConfig: appRouter.config(),
             ),
           );
         },

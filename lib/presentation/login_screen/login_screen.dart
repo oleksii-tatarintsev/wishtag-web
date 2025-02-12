@@ -1,7 +1,8 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wishtag_web/core/router/router.gr.dart';
 import 'package:wishtag_web/presentation/login_screen/login_notifier.dart';
 import 'package:wishtag_web/shared/styles.dart';
 import 'package:wishtag_web/shared/ui_kit.dart';
@@ -90,13 +91,16 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     title: 'Login',
                     buttonStyle: FilledTextButtonType.green,
                     onPressed: () async {
-                      if(_isButtonActive.value){
+                      if (_isButtonActive.value) {
                         final loginNotifier = ref.read(loginNotifierProvider.notifier);
                         await loginNotifier.singIn(
                           email: _emailController.text.trim(),
                           password: _passwordController.text.trim(),
                         );
-                      }else{
+                        if (loginNotifier.state.hasValue) {
+                          await AutoRouter.of(context).push(DashboardRoute());
+                        }
+                      } else {
                         Toast.add(message: 'loc_check_errors', containerColor: Colors.amber);
                       }
                     },

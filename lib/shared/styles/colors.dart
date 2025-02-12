@@ -8,4 +8,5 @@ class AppColors {
   static const Color mainBg = Color(0xffF3F4F6);
   static const Color containerBorder = Color(0xffD5DBDB);
   static const Color inputStyleColor = Color(0xffB0BEC5);
+  static const Color sideBarColor = Color(0xff2C3E50);
 }
