@@ -67,7 +67,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               mainAxisSize: MainAxisSize.min,
               spacing: 20.r,
               children: [
-                Text('Admin Panel Login', style: AppFonts.bold23),
+                Text('Admin Panel Login', style: AppFonts.title),
                 AppTextField(
                   title: 'Email:',
                   placeHolder: 'Enter email...',
