@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wishtag_web/core/router/router.gr.dart';
-import 'package:wishtag_web/presentation/home_screen/widgets/navigation_bar_item.dart';
-import 'package:wishtag_web/presentation/login_screen/login_notifier.dart';
+import 'package:wishtag_web/presentation/auth/auth_notifier.dart';
+import 'package:wishtag_web/presentation/home/widgets/navigation_bar_item.dart';
 import 'package:wishtag_web/shared/styles.dart';
 
 @RoutePage(name: 'HomeRoute')
@@ -21,7 +21,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   void initState() {
-    if (!mounted) return;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(Duration.zero, () {
         if (!mounted) return;
@@ -59,7 +58,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           height: 60.r,
                           child: Row(spacing: 10, children: [
                             SvgPicture.asset(
-                              'assets/icons/box-heart.svg',
+                              AppIcons.boxHeart,
                               width: 28.r,
                               colorFilter: ColorFilter.mode(
                                 Colors.white,
@@ -80,7 +79,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           builder: (context, value, child) {
                             return NavigationBarItem(
                               title: 'Dashboard',
-                              icon: 'assets/icons/dashboard-panel.svg',
+                              icon: AppIcons.dashboardPanel,
                               route: DashboardRoute(),
                               isActiveTab: value == '/dashboard',
                               onNavigate: () {
@@ -94,7 +93,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           builder: (context, value, child) {
                             return NavigationBarItem(
                               title: 'Users',
-                              icon: 'assets/icons/users-alt.svg',
+                              icon: AppIcons.usersAlt,
                               route: UsersRoute(),
                               isActiveTab: value == '/users',
                               onNavigate: () {
@@ -108,7 +107,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           builder: (context, value, child) {
                             return NavigationBarItem(
                               title: 'Logs',
-                              icon: 'assets/icons/newspaper.svg',
+                              icon: AppIcons.newspaper,
                               route: UsersRoute(),
                               isActiveTab: value == '/logs',
                               onNavigate: () {
@@ -122,7 +121,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           builder: (context, value, child) {
                             return NavigationBarItem(
                               title: 'Administrators',
-                              icon: 'assets/icons/admin-alt.svg',
+                              icon: AppIcons.adminAlt,
                               route: UsersRoute(),
                               isActiveTab: value == '/administrators',
                               onNavigate: () {
@@ -136,7 +135,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                           builder: (context, value, child) {
                             return NavigationBarItem(
                               title: 'Support',
-                              icon: 'assets/icons/user-headset.svg',
+                              icon: AppIcons.userHeadset,
                               route: UsersRoute(),
                               isActiveTab: value == '/support',
                               onNavigate: () {
@@ -155,12 +154,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             minWidth: 50,
                             color: AppColors.redButton,
                             onPressed: () {
-                              final loginNotifier = ref.read(loginNotifierProvider.notifier);
+                              final loginNotifier = ref.read(authNotifierProvider.notifier);
                               loginNotifier.signOut();
                               AutoRouter.of(context).push(LoginRoute());
                             },
                             child: SvgPicture.asset(
-                              'assets/icons/logout.svg',
+                              AppIcons.logout,
                               colorFilter: ColorFilter.mode(AppColors.mainBg, BlendMode.srcIn),
                             ),
                           ),

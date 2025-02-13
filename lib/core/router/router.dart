@@ -8,14 +8,15 @@ import 'package:wishtag_web/main.dart';
 class AppRouter extends RootStackRouter {
   @override
   RouteType get defaultRouteType => RouteType.custom(
-    durationInMilliseconds: 600,
-    reverseDurationInMilliseconds: 600,
-    transitionsBuilder: (_, anim, __, child) {
-    return FadeTransition(
-      opacity: anim,
-      child: child,
-    );
-  },);
+        durationInMilliseconds: 600,
+        reverseDurationInMilliseconds: 600,
+        transitionsBuilder: (_, anim, __, child) {
+          return FadeTransition(
+            opacity: anim,
+            child: child,
+          );
+        },
+      );
 
   @override
   List<AutoRoute> get routes => [

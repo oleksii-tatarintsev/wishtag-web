@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wishtag_web/core/router/router.gr.dart';
-import 'package:wishtag_web/presentation/login_screen/login_notifier.dart';
+import 'package:wishtag_web/presentation/auth/auth_notifier.dart';
 
 class AuthGuard extends AutoRouteGuard {
   final ProviderContainer container;
@@ -10,13 +10,13 @@ class AuthGuard extends AutoRouteGuard {
 
   @override
   void onNavigation(NavigationResolver resolver, StackRouter router) {
-    final loginState = container.read(loginNotifierProvider);
+    final loginState = container.read(authNotifierProvider);
 
     if (loginState.hasValue && loginState.value != null) {
       resolver.next(true);
     } else {
       router.push(LoginRoute()).then((_) {
-        final updatedState = container.read(loginNotifierProvider);
+        final updatedState = container.read(authNotifierProvider);
         resolver.next(updatedState.hasValue && updatedState.value != null);
       });
     }

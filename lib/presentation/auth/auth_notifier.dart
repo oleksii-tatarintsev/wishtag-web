@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:wishtag_web/data/repositories/auth_repository.dart';
 import 'package:wishtag_web/utils/toast_messenger/toast_controller.dart';
 
-class LoginNotifier extends StateNotifier<AsyncValue<User?>> {
+class AuthNotifier extends StateNotifier<AsyncValue<User?>> {
   final AuthRepository _authRepository;
 
-  LoginNotifier(this._authRepository) : super(const AsyncValue.data(null));
+  AuthNotifier(this._authRepository) : super(const AsyncValue.data(null));
 
   Future<void> singIn({required String email, required String password}) async {
     state = const AsyncValue.loading();
@@ -27,8 +27,8 @@ class LoginNotifier extends StateNotifier<AsyncValue<User?>> {
   }
 }
 
-final loginNotifierProvider = StateNotifierProvider<LoginNotifier, AsyncValue<User?>>(
-  (ref) => LoginNotifier(
+final authNotifierProvider = StateNotifierProvider<AuthNotifier, AsyncValue<User?>>(
+  (ref) => AuthNotifier(
     ref.watch(authRepositoryProvider),
   ),
 );
