@@ -27,8 +27,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         currentRoute.value = AutoRouter.of(context).currentPath;
       });
     });
-
-    AutoRouter.of(context).push(DashboardRoute());
+    if (AutoRouter.of(context).currentPath == '/') {
+      AutoRouter.of(context).push(DashboardRoute());
+    }
     super.initState();
   }
 
@@ -94,7 +95,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             return NavigationBarItem(
                               title: 'Users',
                               icon: AppIcons.usersAlt,
-                              route: UsersRoute(),
+                              route: UserGridRoute(),
                               isActiveTab: value == '/users',
                               onNavigate: () {
                                 currentRoute.value = '/users';
@@ -102,50 +103,50 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             );
                           },
                         ),
-                        ValueListenableBuilder(
-                          valueListenable: currentRoute,
-                          builder: (context, value, child) {
-                            return NavigationBarItem(
-                              title: 'Logs',
-                              icon: AppIcons.newspaper,
-                              route: UsersRoute(),
-                              isActiveTab: value == '/logs',
-                              onNavigate: () {
-                                currentRoute.value = '/logs';
-                              },
-                            );
-                          },
-                        ),
-                        ValueListenableBuilder(
-                          valueListenable: currentRoute,
-                          builder: (context, value, child) {
-                            return NavigationBarItem(
-                              title: 'Administrators',
-                              icon: AppIcons.adminAlt,
-                              route: UsersRoute(),
-                              isActiveTab: value == '/administrators',
-                              onNavigate: () {
-                                currentRoute.value = '/administrators';
-                              },
-                            );
-                          },
-                        ),
-                        ValueListenableBuilder(
-                          valueListenable: currentRoute,
-                          builder: (context, value, child) {
-                            return NavigationBarItem(
-                              title: 'Support',
-                              icon: AppIcons.userHeadset,
-                              route: UsersRoute(),
-                              isActiveTab: value == '/support',
-                              onNavigate: () {
-                                Future.delayed(Duration.zero, () {
-                                  currentRoute.value = '/support';
-                                });
-                              },
-                            );
-                          },
-                        ),
+                        // ValueListenableBuilder(
+                        //   valueListenable: currentRoute,
+                        //   builder: (context, value, child) {
+                        //     return NavigationBarItem(
+                        //       title: 'Logs',
+                        //       icon: AppIcons.newspaper,
+                        //       route: UserGridRoute(),
+                        //       isActiveTab: value == '/logs',
+                        //       onNavigate: () {
+                        //         currentRoute.value = '/logs';
+                        //       },
+                        //     );
+                        //   },
+                        // ),
+                        // ValueListenableBuilder(
+                        //   valueListenable: currentRoute,
+                        //   builder: (context, value, child) {
+                        //     return NavigationBarItem(
+                        //       title: 'Administrators',
+                        //       icon: AppIcons.adminAlt,
+                        //       route: UserGridRoute(),
+                        //       isActiveTab: value == '/administrators',
+                        //       onNavigate: () {
+                        //         currentRoute.value = '/administrators';
+                        //       },
+                        //     );
+                        //   },
+                        // ),
+                        // ValueListenableBuilder(
+                        //   valueListenable: currentRoute,
+                        //   builder: (context, value, child) {
+                        //     return NavigationBarItem(
+                        //       title: 'Support',
+                        //       icon: AppIcons.userHeadset,
+                        //       route: UserGridRoute(),
+                        //       isActiveTab: value == '/support',
+                        //       onNavigate: () {
+                        //         Future.delayed(Duration.zero, () {
+                        //           currentRoute.value = '/support';
+                        //         });
+                        //       },
+                        //     );
+                        //   },
+                        // ),
                         Spacer(),
                         Center(
                           child: MaterialButton(

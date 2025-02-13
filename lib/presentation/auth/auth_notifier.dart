@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart' show Colors;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:wishtag_web/data/repositories/auth_repository.dart';
+import 'package:wishtag_web/data/repositories.dart';
 import 'package:wishtag_web/utils/toast_messenger/toast_controller.dart';
 
 class AuthNotifier extends StateNotifier<AsyncValue<User?>> {

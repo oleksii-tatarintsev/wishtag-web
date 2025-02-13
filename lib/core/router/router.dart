@@ -26,11 +26,11 @@ class AppRouter extends RootStackRouter {
           page: HomeRoute.page,
           initial: true,
           guards: [
-            AuthGuard(globalAuthContainer),
+             AuthGuard(globalAuthContainer),
           ],
           children: [
             AutoRoute(path: 'dashboard', page: DashboardRoute.page),
-            AutoRoute(path: 'users', page: UsersRoute.page),
+            AutoRoute(path: 'users', page: UserGridRoute.page),
           ],
         ),
       ];
