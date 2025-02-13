@@ -11,29 +11,27 @@ class ContentWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.mainBg,
-      child: Expanded(
-        child: Container(
-          margin: EdgeInsets.all(30.r),
-          padding: EdgeInsets.only(
-            top: 6.r,
-            left: 20.r,
+      child: Container(
+        margin: EdgeInsets.all(30.r),
+        padding: EdgeInsets.only(
+          top: 6.r,
+          left: 20.r,
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+            color: AppColors.containerBorder,
+            width: 2,
           ),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(
-              color: AppColors.containerBorder,
-              width: 2,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(8)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: AppFonts.title),
-              ...children,
-            ],
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(title, style: AppFonts.title),
+            ...children,
+          ],
         ),
       ),
     );
