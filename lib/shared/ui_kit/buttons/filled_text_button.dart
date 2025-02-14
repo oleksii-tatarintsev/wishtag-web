@@ -20,10 +20,12 @@ extension on FilledTextButtonType {
 class AppFilledTextButton extends StatelessWidget {
   final String title;
   final FilledTextButtonType buttonStyle;
+  final double? width;
   final VoidCallback? onPressed;
   const AppFilledTextButton({
     required this.title,
     required this.buttonStyle,
+    this.width,
     this.onPressed,
     super.key,
   });
@@ -31,8 +33,11 @@ class AppFilledTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: double.infinity,
+      width: width,
       child: MaterialButton(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16),
+        ),
         height: 50.r,
         color: buttonStyle.color,
         disabledColor: buttonStyle.color.withValues(alpha: 0.5),

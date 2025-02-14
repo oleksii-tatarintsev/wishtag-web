@@ -9,4 +9,5 @@ class AppFonts {
   static final TextStyle bold20 = TextStyle(fontWeight: FontWeight.bold, fontSize: 20.r);
   static final TextStyle regular14 = TextStyle(fontSize: 14.r);
   static final TextStyle regular16 = TextStyle(fontSize: 16.r);
+  static final TextStyle tableHeader = TextStyle(fontSize: 18.r, fontWeight: FontWeight.w500);
 }

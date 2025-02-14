@@ -14,6 +14,22 @@ class UserGridScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ContentWrapper(
       title: 'Users Management',
+      actions: [
+        AppFilledTextButton(
+          title: 'Delete User(s)',
+          buttonStyle: FilledTextButtonType.red,
+          width: 150.r,
+        ),
+        SizedBox(width: 16.r),
+        AppFilledTextButton(
+          title: 'Create User',
+          buttonStyle: FilledTextButtonType.blue,
+          width: 150.r,
+        ),
+        SizedBox(
+          width: 10.r,
+        )
+      ],
       children: [
         SizedBox(height: 20.r),
         GenericDataTable<String, User>(
@@ -47,8 +63,28 @@ class UserGridScreen extends StatelessWidget {
             ColumnDefinition<User>(
               header: 'Status',
               flex: 3,
-              cellBuilder: (item) => SelectableText(item.status, style: AppFonts.regular16),
-              filterPredicate: (item, filter) => item.status.toLowerCase().contains(filter.toLowerCase()),
+              cellBuilder: (item) => SelectableText(item.role.name, style: AppFonts.regular16),
+              filterPredicate: (item, filter) => item.role.name.toLowerCase().contains(filter.toLowerCase()),
+              filterBuilder: (controller) {
+                return DropdownButtonFormField<String>(
+                  value: controller.text.isEmpty ? null : controller.text,
+                  decoration: const InputDecoration(
+                    labelText: 'Filter by status',
+                    border: OutlineInputBorder(),
+                  ),
+                  items: UserRole.values.getStrings
+                      .map(
+                        (status) => DropdownMenuItem(
+                          value: status,
+                          child: Text(status),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    controller.text = value ?? '';
+                  },
+                );
+              },
             ),
           ],
           idGetter: (item) => item.id,

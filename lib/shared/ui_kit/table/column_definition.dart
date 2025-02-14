@@ -1,18 +1,18 @@
-import 'package:flutter/cupertino.dart' show Widget;
+import 'package:flutter/cupertino.dart' show TextEditingController, Widget;
 
-/// Определение колонки для универсальной таблицы
 class ColumnDefinition<T> {
   final String header;
   final int flex;
-  final Widget Function(T item) cellBuilder;
 
-  /// Фильтр: функция возвращает true, если элемент удовлетворяет фильтру.
+  final Widget Function(T item) cellBuilder;
   final bool Function(T item, String filter)? filterPredicate;
+  final Widget Function(TextEditingController controller)? filterBuilder;
 
   ColumnDefinition({
     required this.header,
     required this.flex,
     required this.cellBuilder,
     this.filterPredicate,
+    this.filterBuilder,
   });
 }

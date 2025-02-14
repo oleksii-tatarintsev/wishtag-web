@@ -5,7 +5,8 @@ import 'package:wishtag_web/shared/styles.dart';
 class ContentWrapper extends StatelessWidget {
   final String title;
   final List<Widget> children;
-  const ContentWrapper({required this.title, required this.children, super.key});
+  final List<Widget>? actions;
+  const ContentWrapper({required this.title, required this.children, this.actions, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,14 @@ class ContentWrapper extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: AppFonts.title),
+            Row(children: [
+              Text(title, style: AppFonts.title),
+              Spacer(),
+              ...actions ??
+                  [
+                    SizedBox.shrink(),
+                  ],
+            ]),
             ...children,
           ],
         ),

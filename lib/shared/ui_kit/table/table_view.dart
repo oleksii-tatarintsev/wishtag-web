@@ -52,10 +52,8 @@ class GenericDataTable<IDType, T> extends StatefulWidget {
 class _GenericDataTableState<IDType, T> extends State<GenericDataTable<IDType, T>> {
   late final List<TextEditingController> _filterControllers =
       widget.columns.map((_) => TextEditingController()).toList();
-
   final ValueNotifier<Set<IDType>> _selectedIdsNotifier = ValueNotifier({});
   final ValueNotifier<int> _currentPageNotifier = ValueNotifier(1);
-
   late final ValueNotifier<int> _itemsPerPageNotifier = ValueNotifier(widget.itemsPerPageOptions.first);
 
   @override
@@ -109,7 +107,6 @@ class _GenericDataTableState<IDType, T> extends State<GenericDataTable<IDType, T
 
   void _applyFilters() {
     _currentPageNotifier.value = 1;
-
     final Map<String, dynamic> filters = {};
     for (int i = 0; i < widget.columns.length; i++) {
       filters[widget.columns[i].header.toLowerCase()] = _filterControllers[i].text;
@@ -160,48 +157,83 @@ class _GenericDataTableState<IDType, T> extends State<GenericDataTable<IDType, T
     return Expanded(
       child: Column(
         children: [
-          ValueListenableBuilder<Set<IDType>>(
-            valueListenable: _selectedIdsNotifier,
-            builder: (context, selectedIds, _) {
-              return Row(
-                children: [
-                  SizedBox(
-                    width: 40,
-                    child: Checkbox(
-                      value: _headerCheckboxValue,
-                      tristate: true,
-                      onChanged: _toggleSelectAll,
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 10),
+            decoration: BoxDecoration(
+              color: AppColors.mainBg,
+              borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
+            ),
+            child: ValueListenableBuilder<Set<IDType>>(
+              valueListenable: _selectedIdsNotifier,
+              builder: (context, selectedIds, _) {
+                return Row(
+                  children: [
+                    SizedBox(
+                      width: 40,
                     ),
-                  ),
-                  for (int i = 0; i < widget.columns.length; i++) ...[
-                    Expanded(
-                      flex: widget.columns[i].flex,
-                      child: TableFilter(
-                        controller: _filterControllers[i],
-                        placeHolder: widget.columns[i].header,
+                    for (int i = 0; i < widget.columns.length; i++) ...[
+                      Expanded(
+                        flex: widget.columns[i].flex,
+                        child: Text(
+                          widget.columns[i].header,
+                          style: AppFonts.tableHeader,
+                        ),
+                      ),
+                    ],
+                    SizedBox(
+                      width: 120,
+                      child: Text(
+                        'Actions',
+                        style: AppFonts.tableHeader,
                       ),
                     ),
                   ],
-                  // Вместо колонки "Actions" – кнопки фильтрации.
-                  SizedBox(
-                    width: 120,
-                    child: Row(
-                      children: [
-                        IconButton(
-                          onPressed: _applyFilters,
-                          icon: const Icon(Icons.search),
-                        ),
-                        SizedBox(width: 4.r),
-                        IconButton(
-                          onPressed: _clearFilters,
-                          icon: const Icon(Icons.clear),
-                        ),
-                      ],
-                    ),
+                );
+              },
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.only(bottom: 10),
+            color: AppColors.mainBg,
+            child: Row(
+              children: [
+                SizedBox(
+                  width: 40,
+                  child: AppCheckbox(
+                    value: _headerCheckboxValue,
+                    tristate: true,
+                    onChanged: _toggleSelectAll,
+                  ),
+                ),
+                for (int i = 0; i < widget.columns.length; i++) ...[
+                  Expanded(
+                    flex: widget.columns[i].flex,
+                    child: widget.columns[i].filterBuilder != null
+                        ? widget.columns[i].filterBuilder!(_filterControllers[i])
+                        : TableFilter(
+                            controller: _filterControllers[i],
+                            placeHolder: 'Filter by ${widget.columns[i].header.toLowerCase()}',
+                          ),
                   ),
                 ],
-              );
-            },
+                SizedBox(
+                  width: 120,
+                  child: Row(
+                    children: [
+                      IconButton(
+                        onPressed: _applyFilters,
+                        icon: const Icon(Icons.search),
+                      ),
+                      SizedBox(width: 4.r),
+                      IconButton(
+                        onPressed: _clearFilters,
+                        icon: const Icon(Icons.clear),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -337,9 +369,12 @@ class _TableRowWidgetState<T, IDType> extends State<_TableRowWidget<T, IDType>> 
         ),
         child: Row(
           children: [
-            Checkbox(
-              value: widget.selected,
-              onChanged: widget.onSelectedChanged,
+            SizedBox(
+              width: 40,
+              child: AppCheckbox(
+                value: widget.selected,
+                onChanged: widget.onSelectedChanged,
+              ),
             ),
             for (final col in widget.columns) ...[
               Expanded(
