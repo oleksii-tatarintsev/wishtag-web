@@ -10,6 +10,7 @@ class GenericDataTable<IDType, T> extends StatefulWidget {
   final IDType Function(T item) idGetter;
   final Widget Function(T item)? rowActionsBuilder;
   final List<int> itemsPerPageOptions;
+  final int initialItemsPerPage;
 
   final ValueChanged<List<IDType>>? onSelectionChanged;
   final ValueChanged<Map<String, dynamic>>? onFiltersApplied;
@@ -23,6 +24,7 @@ class GenericDataTable<IDType, T> extends StatefulWidget {
     this.onSelectionChanged,
     this.onFiltersApplied,
     this.itemsPerPageOptions = const [15, 25, 50, 100],
+    this.initialItemsPerPage = 10,
   });
 
   factory GenericDataTable.fromColumns({
@@ -52,6 +54,7 @@ class GenericDataTable<IDType, T> extends StatefulWidget {
 class _GenericDataTableState<IDType, T> extends State<GenericDataTable<IDType, T>> {
   late final List<TextEditingController> _filterControllers =
       widget.columns.map((_) => TextEditingController()).toList();
+
   final ValueNotifier<Set<IDType>> _selectedIdsNotifier = ValueNotifier({});
   final ValueNotifier<int> _currentPageNotifier = ValueNotifier(1);
   late final ValueNotifier<int> _itemsPerPageNotifier = ValueNotifier(widget.itemsPerPageOptions.first);
@@ -163,77 +166,57 @@ class _GenericDataTableState<IDType, T> extends State<GenericDataTable<IDType, T
               color: AppColors.mainBg,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(8), topRight: Radius.circular(8)),
             ),
-            child: ValueListenableBuilder<Set<IDType>>(
-              valueListenable: _selectedIdsNotifier,
-              builder: (context, selectedIds, _) {
-                return Row(
+            child: Row(
+              children: [
+                SizedBox(width: 40),
+                for (int i = 0; i < widget.columns.length; i++) ...[
+                  Expanded(
+                    flex: widget.columns[i].flex,
+                    child: Text(widget.columns[i].header, style: AppFonts.tableHeader),
+                  ),
+                ],
+                SizedBox(width: 120, child: Text('Actions', style: AppFonts.tableHeader)),
+              ],
+            ),
+          ),
+          ValueListenableBuilder<Set<IDType>>(
+            valueListenable: _selectedIdsNotifier,
+            builder: (context, selectedIds, _) {
+              return Container(
+                padding: EdgeInsets.only(bottom: 10),
+                color: AppColors.mainBg,
+                child: Row(
                   children: [
                     SizedBox(
                       width: 40,
+                      child: AppCheckbox(value: _headerCheckboxValue, tristate: true, onChanged: _toggleSelectAll),
                     ),
                     for (int i = 0; i < widget.columns.length; i++) ...[
                       Expanded(
                         flex: widget.columns[i].flex,
-                        child: Text(
-                          widget.columns[i].header,
-                          style: AppFonts.tableHeader,
-                        ),
+                        child:
+                            widget.columns[i].filterBuilder != null
+                                ? widget.columns[i].filterBuilder!(_filterControllers[i])
+                                : TableFilter(
+                                  controller: _filterControllers[i],
+                                  placeHolder: 'Filter by ${widget.columns[i].header.toLowerCase()}',
+                                ),
                       ),
                     ],
                     SizedBox(
                       width: 120,
-                      child: Text(
-                        'Actions',
-                        style: AppFonts.tableHeader,
+                      child: Row(
+                        children: [
+                          IconButton(onPressed: _applyFilters, icon: const Icon(Icons.search)),
+                          SizedBox(width: 4.r),
+                          IconButton(onPressed: _clearFilters, icon: const Icon(Icons.clear)),
+                        ],
                       ),
                     ),
                   ],
-                );
-              },
-            ),
-          ),
-          Container(
-            padding: EdgeInsets.only(bottom: 10),
-            color: AppColors.mainBg,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 40,
-                  child: AppCheckbox(
-                    value: _headerCheckboxValue,
-                    tristate: true,
-                    onChanged: _toggleSelectAll,
-                  ),
                 ),
-                for (int i = 0; i < widget.columns.length; i++) ...[
-                  Expanded(
-                    flex: widget.columns[i].flex,
-                    child: widget.columns[i].filterBuilder != null
-                        ? widget.columns[i].filterBuilder!(_filterControllers[i])
-                        : TableFilter(
-                            controller: _filterControllers[i],
-                            placeHolder: 'Filter by ${widget.columns[i].header.toLowerCase()}',
-                          ),
-                  ),
-                ],
-                SizedBox(
-                  width: 120,
-                  child: Row(
-                    children: [
-                      IconButton(
-                        onPressed: _applyFilters,
-                        icon: const Icon(Icons.search),
-                      ),
-                      SizedBox(width: 4.r),
-                      IconButton(
-                        onPressed: _clearFilters,
-                        icon: const Icon(Icons.clear),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+              );
+            },
           ),
           const SizedBox(height: 8),
           Expanded(
@@ -304,12 +287,15 @@ class _GenericDataTableState<IDType, T> extends State<GenericDataTable<IDType, T
                       const SizedBox(width: 16),
                       DropdownButton<int>(
                         value: itemsPerPage,
-                        items: widget.itemsPerPageOptions
-                            .map((e) => DropdownMenuItem<int>(
-                                  value: e,
-                                  child: Text('$e per page', style: AppFonts.regular18),
-                                ))
-                            .toList(),
+                        items:
+                            widget.itemsPerPageOptions
+                                .map(
+                                  (e) => DropdownMenuItem<int>(
+                                    value: e,
+                                    child: Text('$e per page', style: AppFonts.regular18),
+                                  ),
+                                )
+                                .toList(),
                         onChanged: (newValue) {
                           if (newValue != null) {
                             _itemsPerPageNotifier.value = newValue;
@@ -355,6 +341,12 @@ class _TableRowWidgetState<T, IDType> extends State<_TableRowWidget<T, IDType>> 
   late Color backgroundColor = widget.index.isEven ? Colors.white : const Color(0xffFAFAFA);
 
   @override
+  void initState() {
+    backgroundColor = widget.index.isEven ? Colors.white : const Color(0xffFAFAFA);
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MouseRegion(
       onEnter: (_) => setState(() => backgroundColor = Colors.blue.shade50),
@@ -363,25 +355,12 @@ class _TableRowWidgetState<T, IDType> extends State<_TableRowWidget<T, IDType>> 
         height: 40.r,
         decoration: BoxDecoration(
           color: backgroundColor,
-          border: Border(
-            bottom: BorderSide(color: Colors.grey.shade300),
-          ),
+          border: Border(bottom: BorderSide(color: Colors.grey.shade300)),
         ),
         child: Row(
           children: [
-            SizedBox(
-              width: 40,
-              child: AppCheckbox(
-                value: widget.selected,
-                onChanged: widget.onSelectedChanged,
-              ),
-            ),
-            for (final col in widget.columns) ...[
-              Expanded(
-                flex: col.flex,
-                child: col.cellBuilder(widget.item),
-              ),
-            ],
+            SizedBox(width: 40, child: Checkbox(value: widget.selected, onChanged: widget.onSelectedChanged)),
+            for (final col in widget.columns) ...[Expanded(flex: col.flex, child: col.cellBuilder(widget.item))],
             SizedBox(
               width: 120,
               child: widget.rowActionsBuilder != null ? widget.rowActionsBuilder!(widget.item) : const SizedBox(),

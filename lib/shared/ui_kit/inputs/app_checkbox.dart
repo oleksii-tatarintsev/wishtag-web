@@ -15,10 +15,6 @@ class AppCheckbox extends StatefulWidget {
 class _AppCheckboxState extends State<AppCheckbox> {
   @override
   Widget build(BuildContext context) {
-    return Checkbox(
-      value: widget.value,
-      tristate: widget.tristate,
-      onChanged: widget.onChanged,
-    );
+    return Checkbox(value: widget.value, tristate: widget.tristate, onChanged: widget.onChanged);
   }
 }
