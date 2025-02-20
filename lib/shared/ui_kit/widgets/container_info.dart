@@ -27,12 +27,7 @@ class ContainerInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 18.r),
-      decoration: BoxDecoration(
-        color: color.color,
-        borderRadius: BorderRadius.all(
-          Radius.circular(12),
-        ),
-      ),
+      decoration: BoxDecoration(color: color.color, borderRadius: BorderRadius.all(Radius.circular(12))),
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.only(left: 20.r),
       width: 250.r,
@@ -41,14 +36,8 @@ class ContainerInfo extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: AppFonts.regular18.copyWith(color: Colors.white),
-          ),
-          Text(
-            value,
-            style: AppFonts.title.copyWith(color: Colors.white),
-          ),
+          Text(title, style: AppFonts.regular18.copyWith(color: Colors.white)),
+          Text(value, style: AppFonts.title.copyWith(color: Colors.white)),
         ],
       ),
     );

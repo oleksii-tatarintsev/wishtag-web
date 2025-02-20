@@ -45,11 +45,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   width: 220.r,
                   color: AppColors.sideBarColor,
                   child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 15.r,
-                      right: 15.r,
-                      bottom: 15.r,
-                    ),
+                    padding: EdgeInsets.only(left: 15.r, right: 15.r, bottom: 15.r),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,24 +53,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         SizedBox(
                           width: 200.r,
                           height: 60.r,
-                          child: Row(spacing: 10, children: [
-                            SvgPicture.asset(
-                              AppIcons.boxHeart,
-                              width: 28.r,
-                              colorFilter: ColorFilter.mode(
-                                Colors.white,
-                                BlendMode.srcIn,
+                          child: Row(
+                            spacing: 10,
+                            children: [
+                              SvgPicture.asset(
+                                AppIcons.boxHeart,
+                                width: 28.r,
+                                colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn),
                               ),
-                            ),
-                            Text(
-                              'WishTag',
-                              style: AppFonts.bold28.copyWith(color: Colors.white),
-                            ),
-                          ]),
+                              Text('WishTag', style: AppFonts.bold28.copyWith(color: Colors.white)),
+                            ],
+                          ),
                         ),
-                        SizedBox(
-                          height: 30.r,
-                        ),
+                        SizedBox(height: 30.r),
                         ValueListenableBuilder(
                           valueListenable: currentRoute,
                           builder: (context, value, child) {
@@ -164,7 +155,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               colorFilter: ColorFilter.mode(AppColors.mainBg, BlendMode.srcIn),
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -172,9 +163,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               ),
             ],
           ),
-          Flexible(
-            child: AutoRouter(),
-          ),
+          Flexible(child: AutoRouter()),
         ],
       ),
     );

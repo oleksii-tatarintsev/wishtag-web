@@ -19,21 +19,9 @@ class DashboardScreen extends StatelessWidget {
             Row(
               spacing: 20.r,
               children: [
-                ContainerInfo(
-                  title: 'Total Users',
-                  value: '1,245',
-                  color: ContainerColor.red,
-                ),
-                ContainerInfo(
-                  title: 'Wishlists Created',
-                  value: '5,678',
-                  color: ContainerColor.blue,
-                ),
-                ContainerInfo(
-                  title: 'Active Tickets',
-                  value: '12',
-                  color: ContainerColor.orange,
-                ),
+                ContainerInfo(title: 'Total Users', value: '1,245', color: ContainerColor.red),
+                ContainerInfo(title: 'Wishlists Created', value: '5,678', color: ContainerColor.blue),
+                ContainerInfo(title: 'Active Tickets', value: '12', color: ContainerColor.orange),
               ],
             ),
           ],
@@ -41,20 +29,14 @@ class DashboardScreen extends StatelessWidget {
         Text('Recent Activities', style: AppFonts.bold20),
         Expanded(
           child: Container(
-            margin: EdgeInsets.only(
-              right: 40.r,
-              top: 10.r,
-              bottom: 40.r,
-            ),
+            margin: EdgeInsets.only(right: 40.r, top: 10.r, bottom: 40.r),
             padding: EdgeInsets.all(20.r),
             width: double.infinity,
             decoration: BoxDecoration(
-                border: Border.all(
-                  color: AppColors.containerBorder,
-                  width: 2,
-                ),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-                color: AppColors.mainBg),
+              border: Border.all(color: AppColors.containerBorder, width: 2),
+              borderRadius: BorderRadius.all(Radius.circular(8)),
+              color: AppColors.mainBg,
+            ),
             child: ListView.builder(
               itemCount: DataMock.recentActivities.length,
               itemBuilder: (BuildContext context, int index) => Text(DataMock.recentActivities[index]),

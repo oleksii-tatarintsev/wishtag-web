@@ -15,20 +15,10 @@ class UserGridScreen extends StatelessWidget {
     return ContentWrapper(
       title: 'Users Management',
       actions: [
-        AppFilledTextButton(
-          title: 'Delete User(s)',
-          buttonStyle: FilledTextButtonType.red,
-          width: 150.r,
-        ),
+        AppFilledTextButton(title: 'Delete User(s)', buttonStyle: FilledTextButtonType.red, width: 150.r),
         SizedBox(width: 16.r),
-        AppFilledTextButton(
-          title: 'Create User',
-          buttonStyle: FilledTextButtonType.blue,
-          width: 150.r,
-        ),
-        SizedBox(
-          width: 10.r,
-        )
+        AppFilledTextButton(title: 'Create User', buttonStyle: FilledTextButtonType.blue, width: 150.r),
+        SizedBox(width: 10.r),
       ],
       children: [
         SizedBox(height: 20.r),
@@ -68,18 +58,11 @@ class UserGridScreen extends StatelessWidget {
               filterBuilder: (controller) {
                 return DropdownButtonFormField<String>(
                   value: controller.text.isEmpty ? null : controller.text,
-                  decoration: const InputDecoration(
-                    labelText: 'Filter by status',
-                    border: OutlineInputBorder(),
-                  ),
-                  items: UserRole.values.getStrings
-                      .map(
-                        (status) => DropdownMenuItem(
-                          value: status,
-                          child: Text(status),
-                        ),
-                      )
-                      .toList(),
+                  decoration: const InputDecoration(labelText: 'Filter by status', border: OutlineInputBorder()),
+                  items:
+                      UserRole.values.getStrings
+                          .map((status) => DropdownMenuItem(value: status, child: Text(status)))
+                          .toList(),
                   onChanged: (value) {
                     controller.text = value ?? '';
                   },

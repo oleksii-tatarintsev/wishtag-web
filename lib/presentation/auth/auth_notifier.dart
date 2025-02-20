@@ -28,7 +28,5 @@ class AuthNotifier extends StateNotifier<AsyncValue<User?>> {
 }
 
 final authNotifierProvider = StateNotifierProvider<AuthNotifier, AsyncValue<User?>>(
-  (ref) => AuthNotifier(
-    ref.watch(authRepositoryProvider),
-  ),
+  (ref) => AuthNotifier(ref.watch(authRepositoryProvider)),
 );

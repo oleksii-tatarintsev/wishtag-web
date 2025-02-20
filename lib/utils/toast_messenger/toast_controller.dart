@@ -11,13 +11,9 @@ class Toast {
     Duration duration = const Duration(seconds: 2),
     Color? textColor,
     Color? containerColor,
-  }) =>
-      _toastsController.add(ToastModel(
-        message: message,
-        duration: duration,
-        textColor: textColor,
-        containerColor: containerColor,
-      ));
+  }) => _toastsController.add(
+    ToastModel(message: message, duration: duration, textColor: textColor, containerColor: containerColor),
+  );
 
   void dispose() {
     _toastsController.close();

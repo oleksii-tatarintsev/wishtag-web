@@ -14,30 +14,23 @@ class ContentWrapper extends StatelessWidget {
       color: AppColors.mainBg,
       child: Container(
         margin: EdgeInsets.all(30.r),
-        padding: EdgeInsets.only(
-          top: 6.r,
-          left: 20.r,
-        ),
+        padding: EdgeInsets.only(top: 6.r, left: 20.r),
         decoration: BoxDecoration(
           color: Colors.white,
-          border: Border.all(
-            color: AppColors.containerBorder,
-            width: 2,
-          ),
+          border: Border.all(color: AppColors.containerBorder, width: 2),
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(children: [
-              Text(title, style: AppFonts.title),
-              Spacer(),
-              ...actions ??
-                  [
-                    SizedBox.shrink(),
-                  ],
-            ]),
+            Row(
+              children: [
+                Text(title, style: AppFonts.title),
+                Spacer(),
+                ...actions ?? [SizedBox.shrink()],
+              ],
+            ),
             ...children,
           ],
         ),

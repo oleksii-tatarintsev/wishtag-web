@@ -21,9 +21,10 @@ class Application extends ConsumerWidget {
             child: MaterialApp.router(
               title: 'WishTag App',
               theme: ThemeData(
-                  colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-                  useMaterial3: true,
-                  fontFamily: 'Montserrat'),
+                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                useMaterial3: true,
+                fontFamily: 'Montserrat',
+              ),
               routerConfig: appRouter.config(),
             ),
           );

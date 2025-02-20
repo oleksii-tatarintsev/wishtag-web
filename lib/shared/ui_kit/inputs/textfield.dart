@@ -37,10 +37,7 @@ class AppTextField extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: AppFonts.regular18,
-          ),
+          Text(title, style: AppFonts.regular18),
           TextFormField(
             enabled: enabled,
             obscureText: obscureText,
@@ -53,33 +50,13 @@ class AppTextField extends StatelessWidget {
             decoration: InputDecoration(
               labelText: placeHolder,
               labelStyle: TextStyle(color: AppColors.inputStyleColor),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.inputStyleColor,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.blueButton,
-                ),
-              ),
-              focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.redButton,
-                ),
-              ),
-              errorBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.redButton,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: AppColors.inputStyleColor,
-                ),
-              ),
+              border: OutlineInputBorder(borderSide: BorderSide(color: AppColors.inputStyleColor)),
+              focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.blueButton)),
+              focusedErrorBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.redButton)),
+              errorBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.redButton)),
+              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.inputStyleColor)),
             ),
-          )
+          ),
         ],
       ),
     );

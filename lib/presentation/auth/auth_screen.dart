@@ -57,9 +57,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           decoration: BoxDecoration(
             border: Border.all(color: AppColors.containerBorder),
             color: Colors.white,
-            borderRadius: BorderRadius.all(
-              Radius.circular(20),
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(20)),
           ),
           child: Form(
             key: _formKey,
@@ -105,7 +103,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       }
                     },
                   ),
-                )
+                ),
               ],
             ),
           ),

@@ -3,11 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final firebaseAuthProvider = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
 
-final authRepositoryProvider = Provider<AuthRepository>(
-  (ref) => AuthRepository(
-    ref.read(firebaseAuthProvider),
-  ),
-);
+final authRepositoryProvider = Provider<AuthRepository>((ref) => AuthRepository(ref.read(firebaseAuthProvider)));
 
 final authStateChangesProvider = StreamProvider<User?>((ref) => ref.watch(firebaseAuthProvider).authStateChanges());
 
@@ -17,10 +13,7 @@ class AuthRepository {
   AuthRepository(this._firebaseAuth);
 
   Future<User?> singIn({required String email, required String password}) async {
-    final credential = await _firebaseAuth.signInWithEmailAndPassword(
-      email: email,
-      password: password,
-    );
+    final credential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
 
     return credential.user;
   }

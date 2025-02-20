@@ -9,12 +9,7 @@ class ToastModel {
   final Color? textColor;
   final Color? containerColor;
 
-  ToastModel({
-    required this.message,
-    this.duration = const Duration(seconds: 2),
-    this.textColor,
-    this.containerColor,
-  });
+  ToastModel({required this.message, this.duration = const Duration(seconds: 2), this.textColor, this.containerColor});
 
   @override
   bool operator ==(Object other) =>

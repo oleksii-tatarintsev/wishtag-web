@@ -7,12 +7,7 @@ class TableFilter extends StatelessWidget {
   final TextEditingController? controller;
   final ValueChanged<String?>? onChanged;
 
-  const TableFilter({
-    this.placeHolder,
-    this.controller,
-    this.onChanged,
-    super.key,
-  });
+  const TableFilter({this.placeHolder, this.controller, this.onChanged, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +24,8 @@ class TableFilter extends StatelessWidget {
           labelText: placeHolder,
           labelStyle: AppFonts.regular14.copyWith(color: AppColors.inputStyleColor),
           isDense: true,
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.inputStyleColor,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.blueButton,
-            ),
-          ),
+          border: OutlineInputBorder(borderSide: BorderSide(color: AppColors.inputStyleColor)),
+          focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: AppColors.blueButton)),
         ),
       ),
     );

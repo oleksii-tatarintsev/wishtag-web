@@ -34,14 +34,7 @@ class NavigationBarItem extends StatelessWidget {
           child: Row(
             spacing: 10.r,
             children: [
-              SvgPicture.asset(
-                icon,
-                width: 18.r,
-                colorFilter: ColorFilter.mode(
-                  Colors.white,
-                  BlendMode.srcIn,
-                ),
-              ),
+              SvgPicture.asset(icon, width: 18.r, colorFilter: ColorFilter.mode(Colors.white, BlendMode.srcIn)),
               Text(
                 title,
                 style: AppFonts.regular18.copyWith(
