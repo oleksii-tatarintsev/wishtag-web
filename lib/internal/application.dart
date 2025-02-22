@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:wishtag_web/core/router/router.dart';
+import 'package:wishtag_web/shared/styles.dart';
 import 'package:wishtag_web/utils/toast_messenger/toast_wrapper.dart';
 
 class Application extends ConsumerWidget {
@@ -21,9 +22,14 @@ class Application extends ConsumerWidget {
             child: MaterialApp.router(
               title: 'WishTag App',
               theme: ThemeData(
-                colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+                colorScheme: ColorScheme.fromSeed(seedColor: AppColors.defaultTextColor),
                 useMaterial3: true,
                 fontFamily: 'Montserrat',
+                textTheme: ThemeData.light().textTheme.apply(
+                  fontFamily: 'Montserrat',
+                  bodyColor: AppColors.defaultTextColor,
+                  displayColor: AppColors.defaultTextColor,
+                ),
               ),
               routerConfig: appRouter.config(),
             ),

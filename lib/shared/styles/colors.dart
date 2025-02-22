@@ -10,4 +10,5 @@ class AppColors {
   static const Color inputStyleColor = Color(0xffB0BEC5);
   static const Color sideBarColor = Color(0xff2C3E50);
   static const Color filterText = Color(0xff7F8C8D);
+  static const Color defaultTextColor = Color(0xff34495E);
 }

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wishtag_web/core/router/router.gr.dart';
 import 'package:wishtag_web/data/models.dart';
 import 'package:wishtag_web/shared/data_mock.dart';
 import 'package:wishtag_web/shared/styles.dart';
@@ -88,7 +89,7 @@ class UserGridScreen extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.visibility, size: 20),
                   tooltip: 'View',
-                  onPressed: () => debugPrint('View ${item.id}'),
+                  onPressed: () => context.router.push(UserViewRoute(user: item)),
                 ),
               ],
             );

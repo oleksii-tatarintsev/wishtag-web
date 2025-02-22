@@ -25,7 +25,14 @@ class AppRouter extends RootStackRouter {
       guards: [AuthGuard(globalAuthContainer)],
       children: [
         AutoRoute(path: 'dashboard', page: DashboardRoute.page),
-        AutoRoute(path: 'users', page: UserGridRoute.page),
+        AutoRoute(
+          path: 'users',
+          page: UsersRootRoute.page,
+          children: [
+            AutoRoute(path: '', page: UserGridRoute.page, initial: true),
+            AutoRoute(path: 'view', page: UserViewRoute.page),
+          ],
+        ),
       ],
     ),
   ];
