@@ -6,7 +6,7 @@ import 'package:wishtag_web/core/router/router.gr.dart';
 import 'package:wishtag_web/presentation/auth/auth_notifier.dart';
 import 'package:wishtag_web/shared/styles.dart';
 import 'package:wishtag_web/shared/ui_kit.dart';
-import 'package:wishtag_web/utils/toast_messenger/toast_controller.dart';
+import 'package:wishtag_web/utils/toast.dart';
 import 'package:wishtag_web/utils/validator.dart';
 
 @RoutePage(name: 'LoginRoute')

@@ -1,10 +1,10 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:wishtag_web/data/models/user/user.dart';
+import 'package:wishtag_web/data/models.dart';
 import 'package:wishtag_web/shared/styles.dart';
 import 'package:wishtag_web/shared/ui_kit.dart';
-import 'package:wishtag_web/utils/toast_messenger/toast_controller.dart';
+import 'package:wishtag_web/utils/toast.dart';
 
 @RoutePage(name: 'UserViewRoute')
 class UserViewScreen extends StatelessWidget {

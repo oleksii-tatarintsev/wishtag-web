@@ -1,5 +1,3 @@
-// ignore_for_file: unnecessary_string_escapes
-
 class Validator {
   static String? validateEmail(String? value) {
     if (value != null) {
