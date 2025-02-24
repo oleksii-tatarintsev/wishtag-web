@@ -54,14 +54,14 @@ class UserGridScreen extends StatelessWidget {
             ColumnDefinition<User>(
               header: 'Status',
               flex: 3,
-              cellBuilder: (item) => SelectableText(item.role.name, style: AppFonts.regular16),
-              filterPredicate: (item, filter) => item.role.name.toLowerCase().contains(filter.toLowerCase()),
+              cellBuilder: (item) => SelectableText(item.status.name, style: AppFonts.regular16),
+              filterPredicate: (item, filter) => item.status.name.toLowerCase().contains(filter.toLowerCase()),
               filterBuilder: (controller) {
                 return DropdownButtonFormField<String>(
                   value: controller.text.isEmpty ? null : controller.text,
                   decoration: const InputDecoration(labelText: 'Filter by status', border: OutlineInputBorder()),
                   items:
-                      UserRole.values.getStrings
+                      UserStatus.values.getStrings
                           .map((status) => DropdownMenuItem(value: status, child: Text(status)))
                           .toList(),
                   onChanged: (value) {

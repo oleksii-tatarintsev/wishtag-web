@@ -1,29 +1,26 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:wishtag_web/data/models/wish_list/wish_list.dart';
 
 part 'user.freezed.dart';
 part 'user.g.dart';
 
-enum UserRole { admin, support, user, banned }
+enum UserStatus { active, banned }
 
-extension UserExtension on UserRole {
+extension UserExtension on UserStatus {
   String get name {
     switch (this) {
-      case UserRole.admin:
-        return 'Admin';
-      case UserRole.support:
-        return 'Support';
-      case UserRole.user:
+      case UserStatus.active:
         return 'User';
-      case UserRole.banned:
+      case UserStatus.banned:
         return 'Banned';
     }
   }
 }
 
-extension UserRolesList on List<UserRole> {
+extension UserStatusesList on List<UserStatus> {
   List<String> get getStrings {
     final List<String> values = [];
-    for (final UserRole value in this) {
+    for (final UserStatus value in this) {
       values.add(value.name);
     }
     return values;
@@ -37,12 +34,11 @@ class User with _$User {
     required String id,
     required String name,
     required String email,
+    required String userName,
     required String? photoUrl,
-    required UserRole role,
+    required UserStatus status,
     required int exp,
-    required List<String?> publicWishes,
-    required List<String?> privateWishes,
-    required List<String?> limitedWishes,
+    @Default(<WishList>[]) List<WishList> wishLists,
   }) = _User;
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

@@ -18,13 +18,13 @@ class UserViewScreen extends StatelessWidget {
       title: 'User Details',
       children: [
         UserCard(user: user),
-        Padding(padding: EdgeInsets.symmetric(vertical: 20.r, horizontal: 20.r), child: Divider(),),
+        Padding(padding: EdgeInsets.symmetric(vertical: 20.r, horizontal: 20.r), child: Divider()),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            WishListWidget(wishlist: user.publicWishes, title: 'Public Lists',),
-            WishListWidget(wishlist: user.privateWishes, title: 'Private Lists',),
-            WishListWidget(wishlist: user.limitedWishes, title: 'Limited Lists',),
+            // WishListWidget(wishlist: user.wishLists, title: 'Public Lists',),
+            // WishListWidget(wishlist: user.privateWishes, title: 'Private Lists',),
+            // WishListWidget(wishlist: user.limitedWishes, title: 'Limited Lists',),
           ],
         ),
       ],
@@ -68,14 +68,14 @@ class UserCard extends StatelessWidget {
                   TextSpan(
                     text: 'Status: ',
                     style: AppFonts.bold18,
-                    children: [TextSpan(text: user.role.toString(), style: AppFonts.regular18)],
+                    children: [TextSpan(text: user.status.toString(), style: AppFonts.regular18)],
                   ),
                 ),
                 SelectableText.rich(
                   TextSpan(
                     text: 'Username: ',
                     style: AppFonts.bold18,
-                    children: [TextSpan(text: user.id, style: AppFonts.regular18)],
+                    children: [TextSpan(text: user.userName, style: AppFonts.regular18)],
                   ),
                 ),
               ],
@@ -92,14 +92,14 @@ class UserCard extends StatelessWidget {
                   TextSpan(
                     text: 'Followers: ',
                     style: AppFonts.bold18,
-                    children: [TextSpan(text: user.publicWishes.length.toString(), style: AppFonts.regular18)],
+                    children: [TextSpan(text: user.wishLists.length.toString(), style: AppFonts.regular18)],
                   ),
                 ),
                 SelectableText.rich(
                   TextSpan(
                     text: 'Following: ',
                     style: AppFonts.bold18,
-                    children: [TextSpan(text: user.privateWishes.length.toString(), style: AppFonts.regular18)],
+                    children: [TextSpan(text: user.wishLists.length.toString(), style: AppFonts.regular18)],
                   ),
                 ),
                 SelectableText.rich(
