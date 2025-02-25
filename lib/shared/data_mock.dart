@@ -1,3 +1,4 @@
+import 'package:uuid/uuid.dart';
 import 'package:wishtag_web/data/models.dart';
 
 class DataMock {
@@ -31,7 +32,7 @@ class DataMock {
 
   static List<User> get users => [
     User(
-      id: 'user_1',
+      id: _uuidGenerator(),
       name: 'Oleksii Tatarintsev',
       email: 'o.tatarintsev@wishtag.app',
       photoUrl: 'https://i.imgur.com/a8KvPKc.png',
@@ -41,7 +42,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Oleksii Tatarintsev'),
     ),
     User(
-      id: 'user_2',
+      id: _uuidGenerator(),
       name: 'Stan Lee',
       email: 's.lee@marvelcomics.com',
       photoUrl: 'https://i.imgur.com/Nq3KiYL.png',
@@ -51,7 +52,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Stan Lee'),
     ),
     User(
-      id: 'user_3',
+      id: _uuidGenerator(),
       name: 'Brad Pitt',
       email: 'brad.pitt@gmail.com',
       photoUrl: 'https://i.imgur.com/nbYhqjv.jpeg',
@@ -61,7 +62,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Brad Pitt'),
     ),
     User(
-      id: 'user_4',
+      id: _uuidGenerator(),
       name: 'Edward Norton',
       email: 'edward.norton@gmail.com',
       photoUrl: 'https://i.imgur.com/PQ1oqFM.png',
@@ -71,7 +72,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Edward Norton'),
     ),
     User(
-      id: 'user_5',
+      id: _uuidGenerator(),
       name: 'Keira Knightley',
       email: 'keira.knightley@gmail.com',
       photoUrl: 'https://i.imgur.com/EP2bEYy.png',
@@ -81,7 +82,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Keira Knightley'),
     ),
     User(
-      id: 'user_6',
+      id: _uuidGenerator(),
       name: 'Naomie Harris',
       email: 'naomie.harris@gmail.com',
       photoUrl: 'https://i.imgur.com/pTANPNB.png',
@@ -91,7 +92,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Naomie Harris'),
     ),
     User(
-      id: 'user_7',
+      id: _uuidGenerator(),
       name: 'Orlando Bloom',
       email: 'orlando.bloom@gmail.com',
       photoUrl: 'https://i.imgur.com/BfbMJhT.png',
@@ -101,7 +102,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Orlando Bloom'),
     ),
     User(
-      id: 'user_8',
+      id: _uuidGenerator(),
       name: 'Bryan Cranston',
       email: 'bryan.cranston@gmail.com',
       photoUrl: 'https://i.imgur.com/nwl3qel.png',
@@ -111,7 +112,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Bryan Cranston'),
     ),
     User(
-      id: 'user_9',
+      id: _uuidGenerator(),
       name: 'Natalie Portman',
       email: 'natalie.portman@gmail.com',
       photoUrl: 'https://i.imgur.com/YblwjqK.png',
@@ -121,7 +122,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Natalie Portman'),
     ),
     User(
-      id: 'user_10',
+      id: _uuidGenerator(),
       name: 'Megan Fox',
       email: 'megan.fox@gmail.com',
       photoUrl: 'https://i.imgur.com/GhGlsTv.png',
@@ -131,7 +132,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Megan Fox'),
     ),
     User(
-      id: 'user_11',
+      id: _uuidGenerator(),
       name: 'Martin Freeman',
       email: 'martin.freeman@gmail.com',
       photoUrl: 'https://i.imgur.com/eZFuRxq.png',
@@ -141,7 +142,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Martin Freeman'),
     ),
     User(
-      id: 'user_12',
+      id: _uuidGenerator(),
       name: 'Samy Naceri',
       email: 'samy.naceri@gmail.com',
       photoUrl: 'https://i.imgur.com/jId3aj7.jpeg',
@@ -151,7 +152,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Samy Naceri'),
     ),
     User(
-      id: 'user_13',
+      id: _uuidGenerator(),
       name: 'Christopher Plummer',
       email: 'christopher.plummer@gmail.com',
       photoUrl: 'https://i.imgur.com/LJEWcQF.png',
@@ -161,7 +162,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Christopher Plummer'),
     ),
     User(
-      id: 'user_14',
+      id: _uuidGenerator(),
       name: 'Alan Rickman',
       email: 'alan.rickman@gmail.com',
       photoUrl: 'https://i.imgur.com/npEYKPo.png',
@@ -171,7 +172,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Alan Rickman'),
     ),
     User(
-      id: 'user_15',
+      id: _uuidGenerator(),
       name: 'Samuel L. Jackson',
       email: 'samuel.l.jackson@gmail.com',
       photoUrl: 'https://i.imgur.com/qA9yKf5.png',
@@ -181,7 +182,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Samuel L. Jackson'),
     ),
     User(
-      id: 'user_16',
+      id: _uuidGenerator(),
       name: 'Evanna Lynch',
       email: 'evanna.lynch@gmail.com',
       photoUrl: 'https://i.imgur.com/LIlFG4v.png',
@@ -191,7 +192,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Evanna Lynch'),
     ),
     User(
-      id: 'user_17',
+      id: _uuidGenerator(),
       name: 'George Clooney',
       email: 'george.clooney@gmail.com',
       photoUrl: 'https://i.imgur.com/vaxezEZ.png',
@@ -201,7 +202,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('George Clooney Lee'),
     ),
     User(
-      id: 'user_18',
+      id: _uuidGenerator(),
       name: 'Leonardo DiCaprio',
       email: 'leonardo.dicaprio@gmail.com',
       photoUrl: 'https://i.imgur.com/JcXkedn.png',
@@ -211,7 +212,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Leonardo DiCaprio'),
     ),
     User(
-      id: 'user_19',
+      id: _uuidGenerator(),
       name: 'Johnny Depp',
       email: 'johnny.depp@gmail.com',
       photoUrl: 'https://i.imgur.com/2C7ASB5.png',
@@ -221,7 +222,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Johnny Depp'),
     ),
     User(
-      id: 'user_20',
+      id: _uuidGenerator(),
       name: 'Milla Jovovich',
       email: 'milla.jovovich@gmail.com',
       photoUrl: 'https://i.imgur.com/5QJhhb1.png',
@@ -231,7 +232,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Milla Jovovich'),
     ),
     User(
-      id: 'user_21',
+      id: _uuidGenerator(),
       name: 'Hugh Jackman',
       email: 'hugh.jackman@gmail.com',
       photoUrl: 'https://i.imgur.com/awqwLFB.png',
@@ -241,7 +242,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Hugh Jackman'),
     ),
     User(
-      id: 'user_22',
+      id: _uuidGenerator(),
       name: 'Christian Bale',
       email: 'christian.bale@gmail.com',
       photoUrl: 'https://i.imgur.com/CNCleIc.png',
@@ -251,7 +252,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Christian Bale'),
     ),
     User(
-      id: 'user_23',
+      id: _uuidGenerator(),
       name: 'Willem Dafoe',
       email: 'willem.dafoe@gmail.com',
       photoUrl: 'https://i.imgur.com/6cLaT3C.png',
@@ -261,7 +262,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Willem Dafoe'),
     ),
     User(
-      id: 'user_24',
+      id: _uuidGenerator(),
       name: 'Matt Ross',
       email: 'matt.ross@gmail.com',
       photoUrl: 'https://i.imgur.com/fPqMsiW.png',
@@ -271,7 +272,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Matt Ross'),
     ),
     User(
-      id: 'user_25',
+      id: _uuidGenerator(),
       name: 'Robert De Niro',
       email: 'robert.de.niro@gmail.com',
       photoUrl: 'https://i.imgur.com/ShQIPEb.png',
@@ -281,7 +282,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Robert De Niro'),
     ),
     User(
-      id: 'user_26',
+      id: _uuidGenerator(),
       name: 'Tom Hanks',
       email: 'tom.hanks@gmail.com',
       photoUrl: 'https://i.imgur.com/rVVbuj9.png',
@@ -291,7 +292,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Tom Hanks'),
     ),
     User(
-      id: 'user_27',
+      id: _uuidGenerator(),
       name: 'Tom Hardy',
       email: 'tom.hardy@gmail.com',
       photoUrl: 'https://i.imgur.com/IgGbqmg.png',
@@ -301,7 +302,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Tom Hardy'),
     ),
     User(
-      id: 'user_28',
+      id: _uuidGenerator(),
       name: 'Michael Fassbender',
       email: 'michael.fassbender@gmail.com',
       photoUrl: 'https://i.imgur.com/dhBKtmZ.png',
@@ -311,7 +312,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Michael Fassbender'),
     ),
     User(
-      id: 'user_29',
+      id: _uuidGenerator(),
       name: 'Jennifer Lawrence',
       email: 'jennifer.lawrence@gmail.com',
       photoUrl: 'https://i.imgur.com/REa5sZv.png',
@@ -321,7 +322,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Jennifer Lawrence'),
     ),
     User(
-      id: 'user_30',
+      id: _uuidGenerator(),
       name: 'Margot Robbie',
       email: 'margot.robbie@gmail.com',
       photoUrl: 'https://i.imgur.com/hoX1ebl.png',
@@ -331,7 +332,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Margot Robbie'),
     ),
     User(
-      id: 'user_31',
+      id: _uuidGenerator(),
       name: 'Gary Oldman',
       email: 'gary.oldman@gmail.com',
       photoUrl: 'https://i.imgur.com/KcBhWuV.png',
@@ -341,7 +342,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Gary Oldman'),
     ),
     User(
-      id: 'user_32',
+      id: _uuidGenerator(),
       name: 'Michael Caine',
       email: 'michael.caine@gmail.com',
       photoUrl: 'https://i.imgur.com/tfSZDgT.png',
@@ -351,7 +352,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Michael Caine'),
     ),
     User(
-      id: 'user_33',
+      id: _uuidGenerator(),
       name: 'Maggie Smith',
       email: 'maggie.smith@gmail.com',
       photoUrl: 'https://i.imgur.com/Ti2ZpTM.png',
@@ -361,7 +362,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Maggie Smith'),
     ),
     User(
-      id: 'user_34',
+      id: _uuidGenerator(),
       name: 'Ewan McGregor',
       email: 'ewan.mcgregor@gmail.com',
       photoUrl: 'https://i.imgur.com/2hYf0ZT.png',
@@ -371,7 +372,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Ewan McGregor'),
     ),
     User(
-      id: 'user_35',
+      id: _uuidGenerator(),
       name: 'James Cameron',
       email: 'james.cameron@gmail.com',
       photoUrl: 'https://i.imgur.com/AAEJ587.png',
@@ -381,7 +382,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('James Cameron'),
     ),
     User(
-      id: 'user_36',
+      id: _uuidGenerator(),
       name: 'Helena Bonham Carter',
       email: 'helena.bonham.carter@gmail.com',
       photoUrl: 'https://i.imgur.com/DEuKfrl.png',
@@ -391,7 +392,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Helena Bonham Carter'),
     ),
     User(
-      id: 'user_37',
+      id: _uuidGenerator(),
       name: 'Jean Reno',
       email: 'jean.reno@gmail.com',
       photoUrl: 'https://i.imgur.com/SANbUlE.png',
@@ -401,7 +402,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Jean Reno'),
     ),
     User(
-      id: 'user_38',
+      id: _uuidGenerator(),
       name: 'Bernard Farcy',
       email: 'bernard.farcy@gmail.com',
       photoUrl: 'https://i.imgur.com/JNbUOMO.png',
@@ -411,7 +412,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Bernard Farcy'),
     ),
     User(
-      id: 'user_39',
+      id: _uuidGenerator(),
       name: 'Amanda Seyfried',
       email: 'amanda.seyfried@gmail.com',
       photoUrl: 'https://i.imgur.com/aICEVjh.png',
@@ -421,7 +422,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Amanda Seyfried'),
     ),
     User(
-      id: 'user_40',
+      id: _uuidGenerator(),
       name: 'Tobey Maguire',
       email: 'tobey.maguire@gmail.com',
       photoUrl: 'https://i.imgur.com/KKUvEmM.png',
@@ -431,7 +432,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Tobey Maguire'),
     ),
     User(
-      id: 'user_41',
+      id: _uuidGenerator(),
       name: 'Julia Roberts',
       email: 'julia.roberts@gmail.com',
       photoUrl: 'https://i.imgur.com/se7bQhr.png',
@@ -441,7 +442,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Julia Roberts'),
     ),
     User(
-      id: 'user_42',
+      id: _uuidGenerator(),
       name: 'Richard Gere',
       email: 'richard.gere@gmail.com',
       photoUrl: 'https://i.imgur.com/EisjBTg.png',
@@ -451,7 +452,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Richard Gere'),
     ),
     User(
-      id: 'user_43',
+      id: _uuidGenerator(),
       name: 'Frédéric Diefenthal',
       email: 'frederic.diefenthal@gmail.com',
       photoUrl: 'https://i.imgur.com/xWM5ewL.png',
@@ -461,7 +462,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Frédéric Diefenthal'),
     ),
     User(
-      id: 'user_44',
+      id: _uuidGenerator(),
       name: 'James McAvoy',
       email: 'james.mcavoy@gmail.com',
       photoUrl: 'https://i.imgur.com/GVKDQUP.png',
@@ -471,7 +472,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('James McAvoy'),
     ),
     User(
-      id: 'user_45',
+      id: _uuidGenerator(),
       name: 'Quentin Tarantino',
       email: 'quentin.tarantino@gmail.com',
       photoUrl: 'https://i.imgur.com/wMqp9UF.png',
@@ -481,7 +482,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Quentin Tarantino'),
     ),
     User(
-      id: 'user_46',
+      id: _uuidGenerator(),
       name: 'Harrison Ford',
       email: 'harrison.ford@gmail.com',
       photoUrl: 'https://i.imgur.com/JTGu7dB.png',
@@ -491,7 +492,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Harrison Ford'),
     ),
     User(
-      id: 'user_47',
+      id: _uuidGenerator(),
       name: 'Annabelle Wallis',
       email: 'annabelle.wallis@gmail.com',
       photoUrl: 'https://i.imgur.com/aTXTUNT.png',
@@ -501,7 +502,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Annabelle Wallis'),
     ),
     User(
-      id: 'user_48',
+      id: _uuidGenerator(),
       name: 'Cillian Murphy',
       email: 'cillian.murphy@gmail.com',
       photoUrl: 'https://i.imgur.com/cJScaHz.png',
@@ -511,7 +512,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Cillian Murphy'),
     ),
     User(
-      id: 'user_49',
+      id: _uuidGenerator(),
       name: 'Uma Thurman',
       email: 'uma.thurman@gmail.com',
       photoUrl: 'https://i.imgur.com/EGJP2ir.png',
@@ -521,7 +522,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Uma Thurman'),
     ),
     User(
-      id: 'user_50',
+      id: _uuidGenerator(),
       name: 'Al Pacino',
       email: 'al.pacino@gmail.com',
       photoUrl: 'https://i.imgur.com/y1u5a3A.jpeg',
@@ -531,7 +532,7 @@ class DataMock {
       wishLists: _generateWishListsForUser('Al Pacino'),
     ),
     User(
-      id: 'user_51',
+      id: _uuidGenerator(),
       name: 'Mark Sheppard',
       email: 'mark.sheppard@gmail.com',
       photoUrl: 'https://i.imgur.com/MY27QAQ.png',
@@ -543,17 +544,16 @@ class DataMock {
   ];
 
   static List<WishList> _generateWishListsForUser(String userName) {
-    final String idSafe = userName.toLowerCase().replaceAll(' ', '_');
     return [
       WishList(
-        id: 'wish_list_${idSafe}_public',
+        id: _uuidGenerator(),
         title: '$userName Public Wish List',
         description: 'Public wishes of $userName',
         type: WishListType.public,
         allowedUsers: [],
         wishes: [
           Wish(
-            id: 'wish_${idSafe}_public_1',
+            id: _uuidGenerator(),
             title: 'Public Wish 1',
             description: 'A public wish of $userName',
             photos: ['https://example.com/public1.jpg'],
@@ -561,7 +561,7 @@ class DataMock {
             geoPoints: ['10.0000,20.0000'],
           ),
           Wish(
-            id: 'wish_${idSafe}_public_2',
+            id: _uuidGenerator(),
             title: 'Public Wish 2',
             description: 'Another public wish of $userName',
             photos: ['https://example.com/public2.jpg'],
@@ -571,14 +571,14 @@ class DataMock {
         ],
       ),
       WishList(
-        id: 'wish_list_${idSafe}_private',
+        id: _uuidGenerator(),
         title: '$userName Private Wish List',
         description: 'Private wishes of $userName',
         type: WishListType.private,
         allowedUsers: [],
         wishes: [
           Wish(
-            id: 'wish_${idSafe}_private_1',
+            id: _uuidGenerator(),
             title: 'Private Wish 1',
             description: 'A private wish of $userName',
             photos: ['https://example.com/private1.jpg'],
@@ -586,7 +586,7 @@ class DataMock {
             geoPoints: [],
           ),
           Wish(
-            id: 'wish_${idSafe}_private_2',
+            id: _uuidGenerator(),
             title: 'Private Wish 2',
             description: 'Another private wish of $userName',
             photos: ['https://example.com/private2.jpg'],
@@ -596,14 +596,14 @@ class DataMock {
         ],
       ),
       WishList(
-        id: 'wish_list_${idSafe}_limited',
+        id: _uuidGenerator(),
         title: '$userName Limited Wish List',
         description: 'Limited wishes of $userName',
         type: WishListType.limited,
         allowedUsers: [],
         wishes: [
           Wish(
-            id: 'wish_${idSafe}_limited_1',
+            id: _uuidGenerator(),
             title: 'Limited Wish 1',
             description: 'A limited wish of $userName',
             photos: ['https://example.com/limited1.jpg'],
@@ -611,7 +611,7 @@ class DataMock {
             geoPoints: [],
           ),
           Wish(
-            id: 'wish_${idSafe}_limited_2',
+            id: _uuidGenerator(),
             title: 'Limited Wish 2',
             description: 'Another limited wish of $userName',
             photos: ['https://example.com/limited2.jpg'],
@@ -621,5 +621,10 @@ class DataMock {
         ],
       ),
     ];
+  }
+
+  static String _uuidGenerator() {
+    final uuid = Uuid();
+    return uuid.v4().substring(0, 17);
   }
 }

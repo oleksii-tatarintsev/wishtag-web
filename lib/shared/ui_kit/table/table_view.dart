@@ -192,16 +192,19 @@ class _GenericDataTableState<IDType, T> extends State<GenericDataTable<IDType, T
                       child: AppCheckbox(value: _headerCheckboxValue, tristate: true, onChanged: _toggleSelectAll),
                     ),
                     for (int i = 0; i < widget.columns.length; i++) ...[
-                      Expanded(
-                        flex: widget.columns[i].flex,
-                        child:
-                            widget.columns[i].filterBuilder != null
-                                ? widget.columns[i].filterBuilder!(_filterControllers[i])
-                                : TableFilter(
-                                  controller: _filterControllers[i],
-                                  placeHolder: 'Filter by ${widget.columns[i].header.toLowerCase()}',
-                                ),
-                      ),
+                      if (widget.columns[i].hideFilter)
+                        Expanded(child: SizedBox())
+                      else
+                        Expanded(
+                          flex: widget.columns[i].flex,
+                          child:
+                              widget.columns[i].filterBuilder != null
+                                  ? widget.columns[i].filterBuilder!(_filterControllers[i])
+                                  : TableFilter(
+                                    controller: _filterControllers[i],
+                                    placeHolder: 'Filter by ${widget.columns[i].header.toLowerCase()}',
+                                  ),
+                        ),
                     ],
                     SizedBox(
                       width: 120,

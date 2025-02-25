@@ -20,3 +20,26 @@ class WishList with _$WishList {
 
   factory WishList.fromJson(Map<String, dynamic> json) => _$WishListFromJson(json);
 }
+
+extension WishListExt on WishListType {
+  String get name {
+    switch (this) {
+      case WishListType.public:
+        return 'Public';
+      case WishListType.private:
+        return 'Private';
+      case WishListType.limited:
+        return 'Limited';
+    }
+  }
+}
+
+extension WishListsValues on List<WishListType> {
+  List<String> get getStrings {
+    final List<String> values = [];
+    for (final WishListType value in this) {
+      values.add(value.name);
+    }
+    return values;
+  }
+}

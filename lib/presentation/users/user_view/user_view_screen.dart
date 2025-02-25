@@ -19,13 +19,76 @@ class UserViewScreen extends StatelessWidget {
       children: [
         UserCard(user: user),
         Padding(padding: EdgeInsets.symmetric(vertical: 20.r, horizontal: 20.r), child: Divider()),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // WishListWidget(wishlist: user.wishLists, title: 'Public Lists',),
-            // WishListWidget(wishlist: user.privateWishes, title: 'Private Lists',),
-            // WishListWidget(wishlist: user.limitedWishes, title: 'Limited Lists',),
+        Text("${user.userName}'s Wishlists", style: AppFonts.title),
+        SizedBox(height: 20.r),
+        GenericDataTable<String, WishList>(
+          itemsPerPageOptions: [15, 25, 50],
+          data: user.wishLists,
+          onSelectionChanged: (selectedItems) {
+            debugPrint('Selected items: $selectedItems');
+          },
+          onFiltersApplied: (filters) {
+            debugPrint('Filters applied: $filters');
+          },
+          columns: [
+            ColumnDefinition<WishList>(
+              header: 'ID',
+              flex: 2,
+              cellBuilder: (item) => SelectableText(item.id, style: AppFonts.regular16),
+              filterPredicate: (item, filter) => item.id.contains(filter),
+            ),
+            ColumnDefinition<WishList>(
+              header: 'Name',
+              flex: 3,
+              cellBuilder: (item) => SelectableText(item.title, style: AppFonts.regular16),
+              filterPredicate: (item, filter) => item.title.toLowerCase().contains(filter.toLowerCase()),
+            ),
+            ColumnDefinition<WishList>(
+              header: 'Type',
+              flex: 2,
+              cellBuilder: (item) => SelectableText(item.type.name, style: AppFonts.regular16),
+              filterPredicate: (item, filter) => item.type.toString().toLowerCase().contains(filter.toLowerCase()),
+              filterBuilder: (controller) {
+                return TableDropDown<String>(
+                  controller: controller,
+                  placeHolder: 'Filter by type..',
+                  value: controller.text.isEmpty ? null : controller.text,
+                  items:
+                      WishListType.values.getStrings
+                          .map((status) => DropdownMenuItem(value: status, child: Text(status)))
+                          .toList(),
+                  onChanged: (value) {
+                    controller.text = value ?? '';
+                  },
+                );
+              },
+            ),
+            ColumnDefinition<WishList>(
+              header: 'Wishes',
+              flex: 1,
+              hideFilter: true,
+              cellBuilder: (item) => SelectableText(item.wishes.length.toString(), style: AppFonts.regular16),
+            ),
           ],
+          idGetter: (item) => item.id,
+          rowActionsBuilder: (item) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.edit, size: 20),
+                  tooltip: 'Edit',
+                  onPressed: () => debugPrint('Edit ${item.id}'),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.delete, size: 20),
+                  tooltip: 'Delete',
+                  onPressed: () => debugPrint('Delete ${item.id}'),
+                ),
+                IconButton(icon: const Icon(Icons.visibility, size: 20), tooltip: 'View', onPressed: () {}),
+              ],
+            );
+          },
         ),
       ],
     );
@@ -68,7 +131,7 @@ class UserCard extends StatelessWidget {
                   TextSpan(
                     text: 'Status: ',
                     style: AppFonts.bold18,
-                    children: [TextSpan(text: user.status.toString(), style: AppFonts.regular18)],
+                    children: [TextSpan(text: user.status.name, style: AppFonts.regular18)],
                   ),
                 ),
                 SelectableText.rich(
@@ -175,51 +238,6 @@ class UserActions extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class WishListWidget extends StatelessWidget {
-  final List<String?> wishlist;
-  final String title;
-  const WishListWidget({required this.wishlist, required this.title, super.key});
-
-  List<Widget> _buildWishLists() {
-    final List<Widget> list = [];
-
-    if (wishlist.isNotEmpty) {
-      for (final wish in wishlist) {
-        list.add(SelectableText('• ${wish!}'));
-      }
-    } else {
-      list.add(SelectableText('Nothing to display'));
-    }
-
-    return list;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(title, style: AppFonts.bold20),
-        Container(
-          height: 450.r,
-          width: 300.r,
-          padding: EdgeInsets.symmetric(horizontal: 16.r, vertical: 8.r),
-          decoration: BoxDecoration(
-            color: AppColors.mainBg,
-            border: Border.all(color: AppColors.containerBorder),
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: _buildWishLists(),
-          ),
-        ),
-      ],
     );
   }
 }

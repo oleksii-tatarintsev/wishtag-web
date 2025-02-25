@@ -10,7 +10,7 @@ extension UserExtension on UserStatus {
   String get name {
     switch (this) {
       case UserStatus.active:
-        return 'User';
+        return 'Active';
       case UserStatus.banned:
         return 'Banned';
     }
