@@ -23,12 +23,10 @@ jobs:
 
       - name: Build Check
         id: build
+        continue-on-error: true
         run: |
-          # Отключаем остановку при ошибке, чтобы сохранить вывод сборки
-          set +e
           build_log=$(flutter build web --release 2>&1)
           exit_code=$?
-          # Сохраняем вывод сборки в output-переменную build_log
           echo "build_log<<EOF" >> $GITHUB_OUTPUT
           echo "$build_log" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
@@ -50,3 +48,5 @@ jobs:
               issue_number: context.issue.number,
               body: commentBody
             });
+            process.exit(1);
+     
