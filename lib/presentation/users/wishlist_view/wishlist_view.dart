@@ -57,8 +57,7 @@ class WishListViewScreen extends StatelessWidget {
                 ),
                 children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       if (wish.photos.isNotEmpty)
                         Column(
