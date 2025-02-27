@@ -1,4 +1,6 @@
 include: package:flutter_lints/flutter.yaml
+formatter:
+  page_width: 120
 analyzer:
   language:
     strict-inference: true # https://github.com/dart-lang/language/issues/508

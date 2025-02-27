@@ -34,7 +34,6 @@ class PhotoPreview extends StatelessWidget {
                   child: Container(
                     width: 150.r,
                     height: 150.r,
-                    alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(15)),
                       color: Colors.black.withValues(alpha: 0.3),

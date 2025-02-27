@@ -15,9 +15,9 @@ class WishListViewScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ContentWrapper(
+      showBackButton: true,
       title: "Details about '${wishList.title}'",
       children: [
-        Text(wishList.description),
         SelectableText.rich(
           TextSpan(
             text: 'Description: ',
@@ -61,7 +61,21 @@ class WishListViewScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       if (wish.photos.isNotEmpty)
-                        Wrap(alignment: WrapAlignment.start, children: [..._buildPhotos(wish.photos)]),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('Photos', style: AppFonts.tableHeader),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: Wrap(
+                                runAlignment: WrapAlignment.start,
+                                alignment: WrapAlignment.start,
+                                children: [..._buildPhotos(wish.photos)],
+                              ),
+                            ),
+                          ],
+                        ),
                     ],
                   ),
                 ],

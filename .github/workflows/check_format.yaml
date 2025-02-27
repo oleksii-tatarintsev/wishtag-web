@@ -1,0 +1,94 @@
+name: Code format and build check
+
+on:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.0'
+          channel: 'stable'
+          cache: true
+
+      - name: Format code check
+        id: format
+        continue-on-error: true
+        run: |
+          dart format --output=none --set-exit-if-changed .
+
+      - name: Report unformatted files
+        if: ${{ steps.format.outcome == 'failure' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const { execSync } = require('child_process');
+            let diff;
+            try {
+              diff = execSync('git diff --name-only').toString().trim();
+            } catch (err) {
+              diff = err.stdout.toString().trim();
+            }
+            if (diff) {
+              const lines = diff.split('\n').filter(line => line.endsWith('.dart'));
+              if (lines.length > 0) {
+                let commentBody = `### Found ${lines.length} Dart-files with wrong formatting\n\n`;
+                commentBody += 'Format is wrong in next files:\n\n';
+                lines.forEach(file => {
+                  commentBody += `- \`${file}\`\n`;
+                });
+                commentBody += '\nPleasem run dart format before merge.';
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.issue.number,
+                  body: commentBody
+                });
+              }
+            }
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Code generation
+        run: dart run build_runner build
+
+      - name: Build check
+        id: build
+        if: ${{ steps.format.outcome == 'success' }}
+        run: |
+          flutter build web --release ${{ secrets.PROD_BUILD_ARGS }}
+
+      - name: Report build failure
+        if: ${{ steps.build.outcome == 'failure' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            let commentBody = '### Build failed\n\n';
+            commentBody += 'Build failed. Please check the code.';
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: commentBody
+            });
+
+      - name: Approve PR if formatting and build succeed
+        if: ${{ steps.format.outcome == 'success' && steps.build.outcome == 'success' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            await github.rest.pulls.createReview({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+              event: 'APPROVE'
+            });
