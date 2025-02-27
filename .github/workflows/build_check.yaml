@@ -1,13 +1,13 @@
-name: Code Format
+name: Build check
 
 on:
   pull_request:
 
 jobs:
-  format_check:
+  build_check:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
+      - name: Check out
         uses: actions/checkout@v3
         with:
           ref: ${{ github.event.pull_request.head.ref }}
@@ -18,6 +18,14 @@ jobs:
           channel: 'stable'
           cache: true
 
-      - name: Format code check
-        run: dart format --output=none --set-exit-if-changed --line-length 120 .
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Code generation
+        run: dart run build_runner build
+
+      - name: Check build
+        run: |
+          flutter build web --release \
+            ${{ secrets.PROD_BUILD_ARGS }}
 
