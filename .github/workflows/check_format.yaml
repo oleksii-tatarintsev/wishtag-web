@@ -28,11 +28,13 @@ jobs:
           echo "EOF" >> $GITHUB_OUTPUT
 
       - name: Report unformatted files
-        if: ${{ steps.format.outputs.format_diff != '' }}
+        if: ${{ steps.format.outcome == 'failure' && steps.format.outputs.format_diff != '' }}
         uses: actions/github-script@v6
+        env:
+          DIFF: ${{ steps.format.outputs.format_diff }}
         with:
           script: |
-            const diff = core.getInput('diff');
+            const diff = process.env.DIFF;
             const lines = diff.split('\n').filter(line => line.endsWith('.dart'));
             if (lines.length > 0) {
               let commentBody = `### Found ${lines.length} Dart files with wrong formatting\n\n`;
@@ -48,8 +50,6 @@ jobs:
                 body: commentBody
               });
             }
-          inputs:
-            diff: ${{ steps.format.outputs.format_diff }}
 
       - name: Install Flutter dependencies
         run: flutter pub get
@@ -72,9 +72,11 @@ jobs:
       - name: Report build failure
         if: ${{ steps.build.outputs.build_exit_code != '0' }}
         uses: actions/github-script@v6
+        env:
+          BUILD_OUTPUT: ${{ steps.build.outputs.build_output }}
         with:
           script: |
-            const buildOutput = core.getInput('build_output');
+            const buildOutput = process.env.BUILD_OUTPUT;
             let commentBody = '### Build failed\n\n';
             commentBody += 'The build failed. Please check the logs below:\n\n';
             commentBody += '```\n' + buildOutput + '\n```\n';
@@ -84,8 +86,6 @@ jobs:
               issue_number: context.issue.number,
               body: commentBody
             });
-          inputs:
-            build_output: ${{ steps.build.outputs.build_output }}
 
       - name: Approve PR if formatting and build succeed
         if: ${{ steps.format.outputs.format_diff == '' && steps.build.outputs.build_exit_code == '0' }}
