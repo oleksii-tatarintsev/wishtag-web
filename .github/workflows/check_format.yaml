@@ -1,0 +1,52 @@
+name: Code Format
+
+on:
+  pull_request:
+
+jobs:
+  format_check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.29.0'
+          channel: stable
+          cache: true
+
+      - name: Format code check
+        id: format
+        continue-on-error: true
+        run: |
+          diff=$(dart format --output=none --set-exit-if-changed --line-length 120 . 2>&1) || true
+          echo "format_diff<<EOF" >> $GITHUB_OUTPUT
+          echo "$diff" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Report Formatting Errors
+        if: ${{ steps.format.outputs.format_diff != '' }}
+        uses: actions/github-script@v7
+        env:
+          FORMAT_DIFF: ${{ steps.format.outputs.format_diff }}
+        with:
+          script: |
+            const diff = process.env.FORMAT_DIFF || '';
+            const lines = diff.split('\n');
+            const fileLines = lines
+              .filter(line => line.startsWith('Changed '))
+              .map(line => line.replace(/^Changed\s+/, '').trim());
+            if (fileLines.length > 0) {
+              const filesList = fileLines.join('\n');
+              const commentBody = `Formatting error.\nPlease check formatting in the following files:\n\n<details>\n<summary>Click to view details</summary>\n\n\`\`\`\n${filesList}\n\`\`\`\n\n</details>`;
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }

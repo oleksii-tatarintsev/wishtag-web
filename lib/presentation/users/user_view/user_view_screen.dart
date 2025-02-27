@@ -1,6 +1,7 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:wishtag_web/core/router/router.gr.dart';
 import 'package:wishtag_web/data/models.dart';
 import 'package:wishtag_web/shared/styles.dart';
 import 'package:wishtag_web/shared/ui_kit.dart';
@@ -85,7 +86,13 @@ class UserViewScreen extends StatelessWidget {
                   tooltip: 'Delete',
                   onPressed: () => debugPrint('Delete ${item.id}'),
                 ),
-                IconButton(icon: const Icon(Icons.visibility, size: 20), tooltip: 'View', onPressed: () {}),
+                IconButton(
+                  icon: const Icon(Icons.visibility, size: 20),
+                  tooltip: 'View',
+                  onPressed: () {
+                    context.navigateTo(WishListViewRoute());
+                  },
+                ),
               ],
             );
           },
