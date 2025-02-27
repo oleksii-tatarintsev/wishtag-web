@@ -11,6 +11,10 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Environment.instance.firebaseInit().whenComplete(
-    () => runApp(UncontrolledProviderScope(container: globalAuthContainer, child: Application())),
+    () => runApp(
+        UncontrolledProviderScope(
+        container: globalAuthContainer, child: Application()
+        )
+    ),
   );
 }
