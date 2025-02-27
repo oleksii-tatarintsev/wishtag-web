@@ -31,6 +31,7 @@ class AppRouter extends RootStackRouter {
           children: [
             AutoRoute(path: '', page: UserGridRoute.page, initial: true),
             AutoRoute(path: 'view', page: UserViewRoute.page),
+            AutoRoute(path: 'wishlist', page: WishListViewRoute.page),
           ],
         ),
       ],
