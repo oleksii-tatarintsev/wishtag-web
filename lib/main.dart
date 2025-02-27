@@ -15,6 +15,6 @@ Future<void> main() async {
         UncontrolledProviderScope(
         container: globalAuthContainer, child: Application()
         )
-    ),
+                  ),
   );
 }
