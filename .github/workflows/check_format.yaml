@@ -36,16 +36,21 @@ jobs:
         with:
           script: |
             const diff = process.env.FORMAT_DIFF || '';
-            const files = diff.split('\n').filter(line => line.trim() !== '');
-            let commentBody = "Formatting error.\nPlease check formatting in the following files:\n\n```";
-            files.forEach(file => {
-              commentBody += "\n" + file;
+            const regex = /(Changed.*|Formatted.*)/g;
+            const matches = diff.match(regex) || [];
+            const formattedMatches = matches.map(line => {
+              if (!line.startsWith('*')) {
+                let parts = line.split(' ');
+                parts[0] = `*${parts[0]}*`;
+                return parts.join(' ');
+              }
+              return line;
             });
-            commentBody += "\n```";
+            const filesList = formattedMatches.join('\n');
+            const commentBody = `Formatting error.\nPlease check formatting in the following files:\n\n<details>\n<summary>Click to view details</summary>\n\n\`\`\`\n${filesList}\n\`\`\`\n\n</details>`;
             await github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
               body: commentBody
             });
-            process.exit(1)

@@ -18,8 +18,11 @@ jobs:
           channel: stable
           cache: true
 
-      - name: Install dependencies
+      - name: Install Flutter dependencies
         run: flutter pub get
+
+      - name: Code generation
+        run: dart run build_runner build
 
       - name: Build Check
         id: build
