@@ -36,21 +36,17 @@ jobs:
         with:
           script: |
             const diff = process.env.FORMAT_DIFF || '';
-            const regex = /(Changed.*|Formatted.*)/g;
-            const matches = diff.match(regex) || [];
-            const formattedMatches = matches.map(line => {
-              if (!line.startsWith('*')) {
-                let parts = line.split(' ');
-                parts[0] = `*${parts[0]}*`;
-                return parts.join(' ');
-              }
-              return line;
-            });
-            const filesList = formattedMatches.join('\n');
-            const commentBody = `Formatting error.\nPlease check formatting in the following files:\n\n<details>\n<summary>Click to view details</summary>\n\n\`\`\`\n${filesList}\n\`\`\`\n\n</details>`;
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body: commentBody
-            });
+            const lines = diff.split('\n');
+            const fileLines = lines
+              .filter(line => line.startsWith('Changed '))
+              .map(line => line.replace(/^Changed\s+/, '').trim());
+            if (fileLines.length > 0) {
+              const filesList = fileLines.join('\n');
+              const commentBody = `Formatting error.\nPlease check formatting in the following files:\n\n<details>\n<summary>Click to view details</summary>\n\n\`\`\`\n${filesList}\n\`\`\`\n\n</details>`;
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+            }
