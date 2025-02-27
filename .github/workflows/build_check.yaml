@@ -15,17 +15,38 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.29.0'
-          channel: 'stable'
+          channel: stable
           cache: true
 
-      - name: Install Flutter dependencies
+      - name: Install dependencies
         run: flutter pub get
 
-      - name: Code generation
-        run: dart run build_runner build
-
-      - name: Check build
+      - name: Build Check
+        id: build
         run: |
-          flutter build web --release \
-            ${{ secrets.PROD_BUILD_ARGS }}
+          # Отключаем остановку при ошибке, чтобы сохранить вывод сборки
+          set +e
+          build_log=$(flutter build web --release 2>&1)
+          exit_code=$?
+          # Сохраняем вывод сборки в output-переменную build_log
+          echo "build_log<<EOF" >> $GITHUB_OUTPUT
+          echo "$build_log" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          echo "exit_code=$exit_code" >> $GITHUB_OUTPUT
+          exit $exit_code
 
+      - name: Report Build Failure
+        if: ${{ steps.build.outcome == 'failure' }}
+        uses: actions/github-script@v6
+        env:
+          BUILD_LOG: ${{ steps.build.outputs.build_log }}
+        with:
+          script: |
+            const buildLog = process.env.BUILD_LOG;
+            const commentBody = `### Build Failed\n\n\`\`\`\n${buildLog}\n\`\`\`\n\nPlease check the build logs above for details.`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: commentBody
+            });
