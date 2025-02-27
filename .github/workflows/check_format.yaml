@@ -8,16 +8,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.ref }}
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.29.0'
-          channel: 'stable'
+          channel: stable
           cache: true
 
       - name: Format code check
-        run: dart format --output=none --set-exit-if-changed --line-length 120 .
+        id: format
+        continue-on-error: true
+        run: |
+          diff=$(dart format --output=none --set-exit-if-changed --line-length 120 . 2>&1) || true
+          echo "format_diff<<EOF" >> $GITHUB_OUTPUT
+          echo "$diff" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
 
+      - name: Report Formatting Errors
+        if: ${{ steps.format.outputs.format_diff != '' }}
+        uses: actions/github-script@v7
+        env:
+          FORMAT_DIFF: ${{ steps.format.outputs.format_diff }}
+        with:
+          script: |
+            const diff = process.env.FORMAT_DIFF || '';
+            const files = diff.split('\n').filter(line => line.trim() !== '');
+            let commentBody = "Formatting error.\nPlease check formatting in the following files:\n\n```";
+            files.forEach(file => {
+              commentBody += "\n" + file;
+            });
+            commentBody += "\n```";
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: commentBody
+            });
+            process.exit(1)
